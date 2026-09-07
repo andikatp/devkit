@@ -1,4 +1,4 @@
-package com.example.devkit
+package com.andikatp.devkit
 
 import io.flutter.embedding.android.FlutterActivity
 
