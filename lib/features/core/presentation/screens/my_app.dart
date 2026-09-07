@@ -1,4 +1,5 @@
-import 'package:devkit/core/flavors/flavor_config.dart';
+import 'package:devkit/core/theme/app_theme.dart';
+import 'package:devkit/features/core/presentation/screens/devkit_console_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -7,10 +8,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'DevKit - Android Developer Dashboard',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(child: Text(FlavorConfig.instance.values.titleApp)),
-      ),
+      theme: AppTheme.darkCyberTheme,
+      home: const DevKitConsoleScreen(),
     );
   }
 }
