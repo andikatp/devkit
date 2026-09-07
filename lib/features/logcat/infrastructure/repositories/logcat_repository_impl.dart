@@ -1,0 +1,14 @@
+import 'package:devkit/features/logcat/domain/entities/logcat_log_entity.dart';
+import 'package:devkit/features/logcat/domain/repositories/logcat_repository.dart';
+import 'package:devkit/features/logcat/infrastructure/datasources/logcat_local_data_source.dart';
+
+class LogcatRepositoryImpl implements LogcatRepository {
+  const new({required this.localDataSource});
+
+  final LogcatLocalDataSource localDataSource;
+
+  @override
+  Future<List<LogcatLogEntity>> getInitialLogs() {
+    return localDataSource.getLogs();
+  }
+}
