@@ -17,6 +17,8 @@ class PermissionsCubit extends Cubit<PermissionsState> {
     final loc = await PermissionService.isLocationGranted();
     final direct = await PermissionService.isWriteSecureSettingsGranted();
 
+    if (isClosed) return;
+
     emit(
       state.copyWith(
         isNearbyWifiGranted: nearby,
