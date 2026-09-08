@@ -1,0 +1,35 @@
+name: Dart & Flutter CI
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    name: Analyze & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
+        with:
+          channel: "stable"
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get --enforce-lockfile
+
+      - name: Analyze Project Source
+        run: flutter analyze
+
+      - name: Run Permissions Feature Tests
+        run: flutter test test/features/permissions
