@@ -69,12 +69,15 @@ void main() {
       expect(cubit.state.isLocationGranted, isTrue);
     });
 
-    test('verifyDirectModeGrant updates isVerifying and isDirectModeGranted', () async {
-      final verifyFuture = cubit.verifyDirectModeGrant();
-      expect(cubit.state.isVerifying, isTrue);
-      await verifyFuture;
-      expect(cubit.state.isVerifying, isFalse);
-      expect(cubit.state.isDirectModeGranted, isTrue);
-    });
+    test(
+      'verifyDirectModeGrant updates isVerifying and isDirectModeGranted',
+      () async {
+        final verifyFuture = cubit.verifyDirectModeGrant();
+        expect(cubit.state.isVerifying, isTrue);
+        await verifyFuture;
+        expect(cubit.state.isVerifying, isFalse);
+        expect(cubit.state.isDirectModeGranted, isTrue);
+      },
+    );
   });
 }

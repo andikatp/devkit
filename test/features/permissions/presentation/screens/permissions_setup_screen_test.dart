@@ -40,7 +40,9 @@ void main() {
       expect(find.text('Notifications'), findsOneWidget);
     });
 
-    testWidgets('navigates to step 2 when Continue button is tapped', (tester) async {
+    testWidgets('navigates to step 2 when Continue button is tapped', (
+      tester,
+    ) async {
       await tester.pumpWidget(createWidgetUnderTest(cubit));
       await tester.pumpAndSettle();
 
