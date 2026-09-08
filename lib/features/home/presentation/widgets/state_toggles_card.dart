@@ -16,7 +16,7 @@ class StateTogglesCard extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: .start,
-      spacing: 12,
+      spacing: 16,
       children: [
         Row(
           mainAxisAlignment: .spaceBetween,
@@ -47,7 +47,7 @@ class StateTogglesCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.cyberCardDeep,
                 borderRadius: .circular(4),
-                border: Border.all(color: AppColors.cyberBorder),
+                border: .all(color: AppColors.cyberBorder),
               ),
               child: Text(
                 state.modeText,

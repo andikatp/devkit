@@ -27,6 +27,10 @@ class _LogcatSearchFilterWidgetState extends State<LogcatSearchFilterWidget> {
     super.dispose();
   }
 
+  void _onSearchChanged(BuildContext context, String val) {
+    context.read<LogcatCubit>().updateFilter(query: val);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,29 +38,23 @@ class _LogcatSearchFilterWidgetState extends State<LogcatSearchFilterWidget> {
       decoration: BoxDecoration(
         color: AppColors.cyberCardAlt.withValues(alpha: 0.85),
         borderRadius: .circular(6),
-        border: Border.all(color: AppColors.cyberBorder),
+        border: .all(color: AppColors.cyberBorder),
       ),
       child: Row(
         spacing: 8,
         children: [
-          const Icon(
-            Icons.search,
-            color: AppColors.cyberMuted,
-            size: 16,
-          ),
+          const Icon(Icons.search, color: AppColors.cyberMuted, size: 16),
           Expanded(
             child: TextField(
               controller: _filterController,
-              onChanged: (val) {
-                context.read<LogcatCubit>().updateFilter(query: val);
-              },
+              onChanged: (val) => _onSearchChanged(context, val),
               style: context.bodySmall.copyWith(
                 color: AppColors.cyanBright,
                 fontSize: 12,
                 fontFamily: 'monospace',
               ),
               decoration: InputDecoration(
-                border: InputBorder.none,
+                border: .none,
                 isDense: true,
                 contentPadding: const .symmetric(vertical: 6),
                 hintText: 'Filter tag, package, or regex...',

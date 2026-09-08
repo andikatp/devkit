@@ -1,41 +1,20 @@
-# Master Flutter Architecture & Refactoring Guide
-
-A comprehensive guide summarizing clean architecture patterns, code quality rules, and refactoring guidelines established for Flutter applications.
-
+---
+trigger: always_on
+description: Architectural standards, code quality rules, and refactoring guidelines for Flutter/Dart development.
 ---
 
-## Table of Contents
-1. [Presentation Layer Rules](#1-presentation-layer-rules)
-   - [1.1 Native `spacing:` Parameter Over `Gap` Widgets](#11-native-spacing-parameter-over-gap-widgets)
-   - [1.2 Extract Event Handlers Above `build()`](#12-extract-event-handlers-above-build)
-   - [1.3 Eliminate Unnecessary Middleman Wrappers (`a -> b -> c` to `a -> c`)](#13-eliminate-unnecessary-middleman-wrappers-a---b---c-to-a---c)
-   - [1.4 Stop Prop Drilling (Read State & Encapsulate Callbacks in Child)](#14-stop-prop-drilling-read-state--encapsulate-callbacks-in-child)
-   - [1.5 Standardized Bottom Sheets with Static `.show()` Pattern](#15-standardized-bottom-sheets-with-static-show-pattern)
-   - [1.6 Screen File Size Limit (<250 Lines) & Inlining Simple Bodies](#16-screen-file-size-limit-250-lines--inlining-simple-bodies)
-   - [1.7 Declarative Toast & Dialog Handling via `BlocListener`](#17-declarative-toast--dialog-handling-via-bloclistener)
-   - [1.8 Dot Shorthand Syntax (Dart 3.6+)](#18-dot-shorthand-syntax-dart-36)
-   - [1.9 Separate Sub-Component Files & Group Related Widgets in Folders](#19-separate-sub-component-files--group-related-widgets-in-folders)
-   - [1.10 Strict One Widget Class Per File](#110-strict-one-widget-class-per-file)
-2. [Application Layer Rules (Cubits / Blocs)](#2-application-layer-rules-cubits--blocs)
-   - [2.1 Keep Cubits Thin & Pure (Delegate to Domain Services)](#21-keep-cubits-thin--pure-delegate-to-domain-services)
-   - [2.2 Optimize API Calls on Filter / Value Change Only](#22-optimize-api-calls-on-filter--value-change-only)
-   - [2.3 Explicit State Notifications (`successMessage` & `errorMessage`)](#23-explicit-state-notifications-successmessage--errormessage)
-   - [2.4 Prompt Dead Code Cleanup](#24-prompt-dead-code-cleanup)
-3. [Domain Layer Rules](#3-domain-layer-rules)
-   - [3.1 Domain Entity Extensions (`extension EntityX on Entity`)](#31-domain-entity-extensions-extension-entityx-on-entity)
-   - [3.2 Stateless Domain Services (`const ServiceName._()`)](#32-stateless-domain-services-const-servicename_)
-4. [Core & Extensions Layer Rules](#4-core--extensions-layer-rules)
-   - [4.1 String & DateTime Extensions for Formatting & Validation](#41-string--datetime-extensions-for-formatting--validation)
+# Master Flutter Architecture & Refactoring Rules
+
+These rules define the required architectural patterns, code quality rules, and refactoring guidelines for Flutter applications across Presentation, Application, Domain, and Core layers.
 
 ---
 
 ## 1. Presentation Layer Rules
 
 ### 1.1 Native `spacing:` Parameter Over `Gap` Widgets
-
 - **Rule**: Replace manual `Gap.w*` and `Gap.h*` children inside `Row` and `Column` widgets with Flutter's native `spacing:` property.
-- **Note**: `Gap` widgets (e.g. `Gap.w12`, `Gap.h16`) remain valid and required when used as item separators inside `ListView.separated` or custom layout builders where `spacing:` is not available.
-- **Benefits**: Cleaner widget trees, fewer unnecessary imports (`gap.dart`), and built-in handling of spacing between elements inside flex layouts (`Row`/`Column`).
+- **Exception**: `Gap` widgets (e.g. `Gap.w12`, `Gap.h16`) remain valid when used as item separators inside `ListView.separated` or custom layout builders where `spacing:` is unavailable.
+- **Benefits**: Cleaner widget trees, fewer unnecessary imports (`gap.dart`), and built-in flex spacing.
 
 #### ❌ Before:
 ```dart
@@ -62,9 +41,8 @@ Row(
 ---
 
 ### 1.2 Extract Event Handlers Above `build()`
-
 - **Rule**: Declare event handlers and async callbacks at the top of the widget class (above `build()`) rather than writing multi-line anonymous functions directly inside `onTap: () async { ... }` or `onPressed: () { ... }`.
-- **Benefits**: Keeps the UI markup clean, readable, and focused purely on widget hierarchy.
+- **Benefits**: Keeps UI markup clean, readable, and focused purely on widget hierarchy.
 
 #### ❌ Before:
 ```dart
@@ -108,14 +86,12 @@ class FilterSection extends StatelessWidget {
 ---
 
 ### 1.3 Eliminate Unnecessary Middleman Wrappers (`a -> b -> c` to `a -> c`)
-
-- **Rule**: Avoid creating intermediate wrapper files (e.g. `DetailOrderBody`, `ChooseSeatBody`) that only pass parameters down to children without adding significant layout or state. Either inline the body directly into the parent screen if <250 lines, or render sub-components directly (`a -> c`).
+- **Rule**: Avoid intermediate wrapper files (e.g. `DetailOrderBody`, `ChooseSeatBody`) that only pass parameters down to children without adding significant layout or state. Either inline the body directly into the parent screen if <250 lines, or render sub-components directly (`a -> c`).
 - **Benefits**: Simplifies file navigation, eliminates single-use wrapper widgets, and reduces project noise.
 
 ---
 
 ### 1.4 Stop Prop Drilling (Read State & Encapsulate Callbacks in Child)
-
 - **Rule**: Do not pass data parameters (e.g., `OrderInfo`, `Ticket`) or callbacks (`onPressed`) down through multiple constructor layers if the child widget can easily access data directly from `context.watch<Cubit>()` or self-handle its action logic.
 - **Benefits**: Decouples parent widgets from child dependencies and makes components self-contained.
 
@@ -168,7 +144,6 @@ const SubmitButton()
 ---
 
 ### 1.5 Standardized Bottom Sheets with Static `.show()` Pattern
-
 - **Rule**: Standardize all bottom sheet widgets to use the `*Sheet` suffix (e.g. `PassengerDetailSheet`, `FilterCalendarSheet`) and expose a static `static Future<T?> show(BuildContext context, ...)` method.
 - **Benefits**: Encapsulates `showModalBottomSheet` styling, shape, background color, and `BlocProvider` injection in one place. Call sites become a single clean line.
 
@@ -212,14 +187,12 @@ PassengerDetailSheet.show(context, index: 0);
 ---
 
 ### 1.6 Screen File Size Limit (<250 Lines) & Inlining Simple Bodies
-
 - **Rule**: Maintain screen files under **250 lines**.
 - Do NOT split simple screens into separate `*_body.dart` files if the entire screen implementation fits cleanly under 250 lines.
 
 ---
 
 ### 1.7 Declarative Toast & Dialog Handling via `BlocListener`
-
 - **Rule**: State should explicitly contain `successMessage: String?` and `errorMessage: String?`. Never call imperative toasts (`Loading.success(...)`) directly inside UI tap handlers or Cubit async methods.
 - **Pattern**: Let Cubit set `successMessage`, and handle UI notifications declaratively inside `BlocListener`.
 
@@ -248,7 +221,6 @@ BlocListener<MyTicketCubit, MyTicketState>(
 ---
 
 ### 1.8 Dot Shorthand Syntax (Dart 3.6+)
-
 - **Rule**: Utilize concise dot shorthand for constructors, static members, enums, `EdgeInsets`, `BorderRadius`, `CrossAxisAlignment`, `MainAxisAlignment`, and `DateTime` methods.
 
 #### ❌ Before:
@@ -272,7 +244,6 @@ emit(state.copyWith(stateType: .loading));
 ---
 
 ### 1.9 Separate Sub-Component Files & Group Related Widgets in Folders
-
 - **Rule**: Every standalone widget (e.g. tooltips, card items, sub-part components) must be defined in its own separate `.dart` file rather than placed at the bottom of another widget file. Related feature sub-components must be organized in a dedicated subfolder within `presentation/widgets/` (e.g. `presentation/widgets/graphic_part/`).
 - **Benefits**: Enforces clean single-responsibility files, prevents file clutter, and standardizes widget organization across the application.
 
@@ -297,7 +268,6 @@ presentation/
 ---
 
 ### 1.10 Strict One Widget Class Per File
-
 - **Rule**: Every `StatelessWidget`, `StatefulWidget`, or `ConsumerWidget` class MUST be placed in its own dedicated `.dart` file. Never declare multiple widget classes in a single file (including private `_SubWidget` classes).
 - **Benefits**: Ensures clear file boundaries, simplifies code searches, improves readability, and adheres strictly to Single Responsibility Principle.
 
@@ -306,25 +276,15 @@ presentation/
 ## 2. Application Layer Rules (Cubits / Blocs)
 
 ### 2.1 Keep Cubits Thin & Pure (Delegate to Domain Services)
-
 - **Rule**: Cubits should only manage state transitions and coordinate repository calls. Move state calculations, list filtering, passenger object assembly, and voucher calculations into Domain Services.
 
----
-
 ### 2.2 Optimize API Calls on Filter / Value Change Only
-
 - **Rule**: When opening modal sheets or pickers, capture the initial state parameter value before showing the sheet. Only trigger network search calls (`searchTicket()`) if the value has actually changed when the sheet closes.
 
----
-
 ### 2.3 Explicit State Notifications (`successMessage` & `errorMessage`)
-
 - **Rule**: Maintain explicit `successMessage: String?` and `errorMessage: String?` in state so `BlocListener` can differentiate between actions that require a toast vs actions that simply refresh state silently.
 
----
-
 ### 2.4 Prompt Dead Code Cleanup
-
 - **Rule**: Immediately delete unused functions in Cubits, unused parameters in constructor dependency injections, obsolete route constants, and unused screen files.
 
 ---
@@ -332,7 +292,6 @@ presentation/
 ## 3. Domain Layer Rules
 
 ### 3.1 Domain Entity Extensions (`extension EntityX on Entity`)
-
 - **Rule**: Move entity state checks, validity rules, and status getters into extension getters on domain entity classes instead of computing them inside UI widgets or Cubits.
 
 #### ❌ Before (In UI):
@@ -360,7 +319,6 @@ final isShowButton = ticket?.canPay ?? false;
 ---
 
 ### 3.2 Stateless Domain Services (`const ServiceName._()`)
-
 - **Rule**: Create stateless domain services (`const ServiceName._();`) with static pure functions to handle multi-step domain transformations (e.g., `OrderInfoService`, `SeatParserService`).
 
 #### ✅ Example:
@@ -400,7 +358,6 @@ class OrderInfoService {
 ## 4. Core & Extensions Layer Rules
 
 ### 4.1 String & DateTime Extensions for Formatting & Validation
-
 - **Rule**: Move all date formatting, currency parsing, and input validation (email, NIK, phone number) to extension getters/methods in `core/extensions/`.
 
 #### ✅ Example:

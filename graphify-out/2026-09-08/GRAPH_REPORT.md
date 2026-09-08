@@ -1,11 +1,11 @@
 # Graph Report - devkit  (2026-09-08)
 
 ## Corpus Check
-- 67 files · ~23,685 words
+- 67 files · ~23,687 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 566 nodes · 772 edges · 39 communities (35 shown, 4 thin omitted)
+- 565 nodes · 771 edges · 39 communities (35 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
@@ -65,13 +65,13 @@
 10. `Architectural Layers` - 5 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `LogcatCubit` --references--> `LogcatState`  [EXTRACTED]
+  lib/features/logcat/application/logcat_cubit.dart → lib/features/logcat/application/logcat_state.dart
 - `ConsoleNavigationCubit` --references--> `ConsoleNavigationState`  [EXTRACTED]
   lib/features/core/application/console_navigation_cubit.dart → lib/features/core/application/console_navigation_state.dart
-- `DevKitDashboardCubit` --references--> `DevKitDashboardState`  [EXTRACTED]
-  lib/features/home/application/devkit_dashboard_cubit.dart → lib/features/home/application/devkit_dashboard_state.dart
-- `build` --references--> `DevKitDashboardCubit`  [EXTRACTED]
-  lib/features/home/presentation/widgets/connect_command_card.dart → lib/features/home/application/devkit_dashboard_cubit.dart
 - `build` --references--> `ConsoleNavigationCubit`  [EXTRACTED]
+  lib/features/core/presentation/screens/devkit_console_screen.dart → lib/features/core/application/console_navigation_cubit.dart
+- `DevKitConsoleScreen` --references--> `ConsoleNavigationCubit`  [EXTRACTED]
   lib/features/core/presentation/screens/devkit_console_screen.dart → lib/features/core/application/console_navigation_cubit.dart
 - `_handleTabSelect` --references--> `ConsoleNavigationCubit`  [EXTRACTED]
   lib/features/core/presentation/screens/devkit_console_screen.dart → lib/features/core/application/console_navigation_cubit.dart
@@ -91,7 +91,7 @@ Nodes (9): build, icon, index, isActive, isPro, isProUnlocked, label, new (+1 mo
 
 ### Community 2 - "devkit_console_screen.dart"
 Cohesion: 0.07
-Nodes (34): Cubit, FocusNode, PaywallCubit, selectTier, updateCustomAmount, copyWith, customAmount, new (+26 more)
+Nodes (33): Cubit, FocusNode, PaywallCubit, selectTier, updateCustomAmount, copyWith, customAmount, new (+25 more)
 
 ### Community 3 - "Architecting Flutter Applications"
 Cohesion: 0.12
@@ -106,8 +106,8 @@ Cohesion: 0.13
 Nodes (14): flavor, FlavorConfig, FlavorType, FlavorValues, initialize, _initialized, _instance, new (+6 more)
 
 ### Community 6 - "connect_command_card.dart"
-Cohesion: 0.06
-Nodes (38): GetIt, initServiceLocator, sl, LogcatRepository, getLogs, LogcatLocalDataSource, LogcatLocalDataSourceImpl, new (+30 more)
+Cohesion: 0.10
+Nodes (20): setAnimationScale, toggleGpuProfiling, toggleLayoutBounds, togglePointerLocation, toggleStrictMode, toggleTaps, toolsRepository, getInitialToolsState (+12 more)
 
 ### Community 7 - "console_state_entity.dart"
 Cohesion: 0.05
@@ -118,8 +118,8 @@ Cohesion: 0.09
 Nodes (22): BuildContext, bodyLarge, bodyMedium, bodySmall, BuildContextExtensions, displayLarge, displayMedium, displaySmall (+14 more)
 
 ### Community 9 - "state_toggles_card.dart"
-Cohesion: 0.07
-Nodes (34): LogcatCubit, copyWith, filterQuery, LogcatState, logs, new, selectedLevel, LogLevel (+26 more)
+Cohesion: 0.09
+Nodes (28): selectTab, unlockPro, LogcatCubit, build, LogcatHeaderBarWidget, new, _onClearLogs, build (+20 more)
 
 ### Community 10 - "pro_paywall_modal.dart"
 Cohesion: 0.13
@@ -134,28 +134,28 @@ Cohesion: 0.10
 Nodes (23): ToolsCubit, animationScale, copyWith, gpuProfiling, new, showLayoutBounds, showPointerLocation, showTaps (+15 more)
 
 ### Community 20 - "tools_screen.dart"
-Cohesion: 0.16
-Nodes (14): ConsoleNavigationCubit, build, DevKitConsoleScreen, _handleTabSelect, new, _onOpenPaywallSheet, _onOpenLogcat, RecentActionsWidget (+6 more)
+Cohesion: 0.09
+Nodes (22): bool get, copyWith, filterQuery, LogcatState, logs, new, selectedLevel, fullText (+14 more)
 
 ### Community 21 - "injection_container.dart"
-Cohesion: 0.25
-Nodes (8): build, ConnectCommandCard, _ConnectCommandCardState, _copied, createState, new, _onCopyCommand, package:flutter/services.dart
+Cohesion: 0.15
+Nodes (12): GetIt, initServiceLocator, sl, getInitialLogs, localDataSource, new, package:devkit/features/home/infrastructure/repositories/home_repository_impl.dart, package:devkit/features/logcat/domain/repositories/logcat_repository.dart (+4 more)
 
 ### Community 22 - "app_assets.dart"
 Cohesion: 0.40
 Nodes (4): AppAssets, grid, _, static const String
 
 ### Community 23 - "state_toggles_card.dart"
-Cohesion: 0.17
-Nodes (15): DevKitDashboardCubit, build, new, _onCopyAdbCommand, _onToggleDevMode, _onTogglePing, _showSnackBar, build (+7 more)
+Cohesion: 0.05
+Nodes (46): ConsoleNavigationCubit, ConsoleNavigationState, copyWith, currentNavIndex, isPro, new, build, _handleTabSelect (+38 more)
 
 ### Community 24 - "device_info_service.dart"
 Cohesion: 0.07
 Nodes (29): dart:io, Future, brand, DeviceInfoData, _deviceInfoPlugin, DeviceInfoService, fallback, getDeviceInfo (+21 more)
 
 ### Community 25 - "package:devkit/core/theme/app_theme.dart"
-Cohesion: 0.07
-Nodes (30): bool get, adbConnectCommand, ConsoleStateEntity, ConsoleStateEntityX, copyWith, deviceIp, deviceModel, devicePort (+22 more)
+Cohesion: 0.12
+Nodes (16): adbConnectCommand, ConsoleStateEntity, ConsoleStateEntityX, copyWith, deviceIp, deviceModel, devicePort, footnoteText (+8 more)
 
 ### Community 26 - "paywall_tier_option_card.dart"
 Cohesion: 0.20
@@ -174,60 +174,60 @@ Cohesion: 0.29
 Nodes (6): build, new, onOpenPaywallModal, ProSuiteBannerCard, package:glow_container/glow_container.dart, VoidCallback
 
 ### Community 30 - "StatelessWidget"
-Cohesion: 0.40
-Nodes (5): DevKitNavItem, QuickActionChipWidget, PaywallTierOptionCard, ToolSwitchCard, StatelessWidget
+Cohesion: 0.33
+Nodes (6): DevKitConsoleScreen, DevKitNavItem, QuickActionChipWidget, PaywallTierOptionCard, ToolSwitchCard, StatelessWidget
 
 ### Community 31 - "bottom_navigation.dart"
 Cohesion: 0.22
 Nodes (8): build, currentIndex, DevKitBottomNavigationBar, isPro, new, onTap, package:devkit/features/core/presentation/widgets/navbar/devkit_nav_item.dart, ValueChanged
 
 ### Community 32 - "logcat_cubit.dart"
-Cohesion: 0.25
-Nodes (7): dart:async, clearLogs, _loadLogs, logcatRepository, selectLogLevel, updateFilter, package:devkit/features/logcat/application/logcat_state.dart
+Cohesion: 0.17
+Nodes (11): dart:async, clearLogs, _loadLogs, logcatRepository, selectLogLevel, updateFilter, getInitialLogs, LogcatRepository (+3 more)
 
 ### Community 33 - "home_repository_impl.dart"
-Cohesion: 0.09
-Nodes (21): homeRepository, _initDeviceInfo, toggleAdbGrantMode, toggleDevOptions, togglePing, toggleUsbDebugging, toggleWirelessDebugging, getDeviceInfo (+13 more)
+Cohesion: 0.20
+Nodes (9): getDeviceInfo, HomeRepository, getDeviceInfo, HomeRepositoryImpl, localDataSource, new, package:devkit/core/services/device_info_service.dart, package:devkit/features/home/domain/repositories/home_repository.dart (+1 more)
 
 ### Community 34 - "package:flutter/material.dart"
 Cohesion: 0.22
 Nodes (8): build, MyApp, new, build, new, ToolsHeaderBarWidget, package:devkit/core/theme/app_theme.dart, package:flutter/material.dart
 
 ### Community 35 - "devkit_dashboard_cubit.dart"
-Cohesion: 0.33
-Nodes (5): ConsoleNavigationState, copyWith, currentNavIndex, isPro, new
+Cohesion: 0.22
+Nodes (8): homeRepository, _initDeviceInfo, toggleAdbGrantMode, toggleDevOptions, togglePing, toggleUsbDebugging, toggleWirelessDebugging, package:devkit/features/home/application/devkit_dashboard_state.dart
 
 ### Community 36 - "home_local_data_source.dart"
-Cohesion: 0.33
-Nodes (5): consoleState, copyWith, DevKitDashboardState, new, package:devkit/features/home/domain/entities/console_state_entity.dart
+Cohesion: 0.50
+Nodes (4): getDeviceInfo, HomeLocalDataSource, HomeLocalDataSourceImpl, new
 
 ### Community 37 - "package:devkit/core/theme/app_theme.dart"
 Cohesion: 0.33
 Nodes (5): build, new, PingStatusCardWidget, targetHost, package:devkit/core/extensions/text_theme.dart
 
 ### Community 38 - "logcat_local_data_source.dart"
-Cohesion: 0.40
-Nodes (4): selectTab, unlockPro, package:devkit/features/core/application/console_navigation_state.dart, package:flutter_bloc/flutter_bloc.dart
+Cohesion: 0.50
+Nodes (4): getLogs, LogcatLocalDataSource, LogcatLocalDataSourceImpl, new
 
 ## Knowledge Gaps
-- **304 isolated node(s):** `AppAssets`, `grid`, `_`, `sl`, `initServiceLocator` (+299 more)
+- **303 isolated node(s):** `AppAssets`, `grid`, `_`, `sl`, `initServiceLocator` (+298 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ConsoleStateEntity` connect `package:devkit/core/theme/app_theme.dart` to `home_local_data_source.dart`?**
+- **Why does `ConsoleStateEntity` connect `package:devkit/core/theme/app_theme.dart` to `state_toggles_card.dart`?**
   _High betweenness centrality (0.043) - this node is a cross-community bridge._
-- **Why does `LogLevel` connect `state_toggles_card.dart` to `package:devkit/core/theme/app_theme.dart`?**
-  _High betweenness centrality (0.040) - this node is a cross-community bridge._
 - **What connects `AppAssets`, `grid`, `_` to the rest of the system?**
-  _304 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _303 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `app_theme.dart` be split into smaller, more focused modules?**
   _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
 - **Should `devkit_console_screen.dart` be split into smaller, more focused modules?**
-  _Cohesion score 0.06543385490753911 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06756756756756757 - nodes in this community are weakly interconnected._
 - **Should `Architecting Flutter Applications` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
 - **Should `logcat_modal.dart` be split into smaller, more focused modules?**
   _Cohesion score 0.07881773399014778 - nodes in this community are weakly interconnected._
+- **Should `flavor_config.dart` be split into smaller, more focused modules?**
+  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._

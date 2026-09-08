@@ -131,8 +131,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_di_injection_container",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "injection_container.dart"
     },
     {
@@ -142,8 +142,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_di_injection_container_sl",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "sl"
     },
     {
@@ -153,8 +153,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "getit",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "getit"
     },
     {
@@ -164,8 +164,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_di_injection_container_initservicelocator",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "initservicelocator"
     },
     {
@@ -219,8 +219,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_home_infrastructure_repositories_home_repository_impl_dart",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "package:devkit/features/home/infrastructure/repositories/home_repository_impl.dart"
     },
     {
@@ -241,8 +241,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_logcat_domain_repositories_logcat_repository_dart",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "package:devkit/features/logcat/domain/repositories/logcat_repository.dart"
     },
     {
@@ -252,8 +252,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_logcat_infrastructure_datasources_logcat_local_data_source_dart",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "package:devkit/features/logcat/infrastructure/datasources/logcat_local_data_source.dart"
     },
     {
@@ -263,8 +263,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_logcat_infrastructure_repositories_logcat_repository_impl_dart",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "package:devkit/features/logcat/infrastructure/repositories/logcat_repository_impl.dart"
     },
     {
@@ -318,8 +318,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_tools_infrastructure_repositories_tools_repository_impl_dart",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "package:devkit/features/tools/infrastructure/repositories/tools_repository_impl.dart"
     },
     {
@@ -329,8 +329,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_get_it_get_it_dart",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "package:get_it/get_it.dart"
     },
     {
@@ -1209,8 +1209,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_application_console_navigation_cubit",
-      "community": 38,
-      "community_name": "logcat_local_data_source.dart",
+      "community": 9,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "console_navigation_cubit.dart"
     },
     {
@@ -1220,8 +1220,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_application_console_navigation_cubit_consolenavigationcubit",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "consolenavigationcubit"
     },
     {
@@ -1242,8 +1242,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_application_console_navigation_cubit_selecttab",
-      "community": 38,
-      "community_name": "logcat_local_data_source.dart",
+      "community": 9,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "selecttab"
     },
     {
@@ -1253,8 +1253,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_application_console_navigation_cubit_unlockpro",
-      "community": 38,
-      "community_name": "logcat_local_data_source.dart",
+      "community": 9,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "unlockpro"
     },
     {
@@ -1264,8 +1264,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_core_application_console_navigation_state_dart",
-      "community": 38,
-      "community_name": "logcat_local_data_source.dart",
+      "community": 9,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "package:devkit/features/core/application/console_navigation_state.dart"
     },
     {
@@ -1275,8 +1275,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_flutter_bloc_flutter_bloc_dart",
-      "community": 38,
-      "community_name": "logcat_local_data_source.dart",
+      "community": 9,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "package:flutter_bloc/flutter_bloc.dart"
     },
     {
@@ -1286,8 +1286,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_application_console_navigation_state",
-      "community": 35,
-      "community_name": "devkit_dashboard_cubit.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "console_navigation_state.dart"
     },
     {
@@ -1297,8 +1297,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_application_console_navigation_state_consolenavigationstate",
-      "community": 35,
-      "community_name": "devkit_dashboard_cubit.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "consolenavigationstate"
     },
     {
@@ -1308,8 +1308,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_application_console_navigation_state_currentnavindex",
-      "community": 35,
-      "community_name": "devkit_dashboard_cubit.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "currentnavindex"
     },
     {
@@ -1319,8 +1319,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_application_console_navigation_state_ispro",
-      "community": 35,
-      "community_name": "devkit_dashboard_cubit.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "ispro"
     },
     {
@@ -1330,8 +1330,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_application_console_navigation_state_new",
-      "community": 35,
-      "community_name": "devkit_dashboard_cubit.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "new"
     },
     {
@@ -1341,8 +1341,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_application_console_navigation_state_copywith",
-      "community": 35,
-      "community_name": "devkit_dashboard_cubit.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "copywith"
     },
     {
@@ -1352,8 +1352,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_presentation_screens_devkit_console_screen",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "devkit_console_screen.dart"
     },
     {
@@ -1363,8 +1363,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_presentation_screens_devkit_console_screen_devkitconsolescreen",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 30,
+      "community_name": "StatelessWidget",
       "norm_label": "devkitconsolescreen"
     },
     {
@@ -1385,8 +1385,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_presentation_screens_devkit_console_screen_new",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "new"
     },
     {
@@ -1396,8 +1396,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_presentation_screens_devkit_console_screen_handletabselect",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "_handletabselect"
     },
     {
@@ -1407,8 +1407,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_presentation_screens_devkit_console_screen_onopenpaywallsheet",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "_onopenpaywallsheet"
     },
     {
@@ -1418,8 +1418,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_core_presentation_screens_devkit_console_screen_build",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "build"
     },
     {
@@ -1462,8 +1462,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_core_presentation_widgets_cyber_grid_background_dart",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "package:devkit/features/core/presentation/widgets/cyber_grid_background.dart"
     },
     {
@@ -1473,8 +1473,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_core_presentation_widgets_navbar_bottom_navigation_dart",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "package:devkit/features/core/presentation/widgets/navbar/bottom_navigation.dart"
     },
     {
@@ -1484,8 +1484,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_home_presentation_screens_devkit_dashboard_view_dart",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "package:devkit/features/home/presentation/screens/devkit_dashboard_view.dart"
     },
     {
@@ -1495,8 +1495,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_logcat_presentation_screens_logcat_screen_dart",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "package:devkit/features/logcat/presentation/screens/logcat_screen.dart"
     },
     {
@@ -1506,8 +1506,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_tools_presentation_screens_tools_screen_dart",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "package:devkit/features/tools/presentation/screens/tools_screen.dart"
     },
     {
@@ -1517,8 +1517,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_tools_presentation_widgets_pro_paywall_sheet_dart",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "package:devkit/features/tools/presentation/widgets/pro_paywall_sheet.dart"
     },
     {
@@ -2089,8 +2089,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_cubit",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 35,
+      "community_name": "devkit_dashboard_cubit.dart",
       "norm_label": "devkit_dashboard_cubit.dart"
     },
     {
@@ -2111,8 +2111,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_cubit_homerepository",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 35,
+      "community_name": "devkit_dashboard_cubit.dart",
       "norm_label": "homerepository"
     },
     {
@@ -2122,8 +2122,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_cubit_initdeviceinfo",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 35,
+      "community_name": "devkit_dashboard_cubit.dart",
       "norm_label": "_initdeviceinfo"
     },
     {
@@ -2133,8 +2133,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_cubit_toggledevoptions",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 35,
+      "community_name": "devkit_dashboard_cubit.dart",
       "norm_label": "toggledevoptions"
     },
     {
@@ -2144,8 +2144,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_cubit_toggleusbdebugging",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 35,
+      "community_name": "devkit_dashboard_cubit.dart",
       "norm_label": "toggleusbdebugging"
     },
     {
@@ -2155,8 +2155,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_cubit_togglewirelessdebugging",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 35,
+      "community_name": "devkit_dashboard_cubit.dart",
       "norm_label": "togglewirelessdebugging"
     },
     {
@@ -2166,8 +2166,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_cubit_toggleadbgrantmode",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 35,
+      "community_name": "devkit_dashboard_cubit.dart",
       "norm_label": "toggleadbgrantmode"
     },
     {
@@ -2177,8 +2177,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_cubit_toggleping",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 35,
+      "community_name": "devkit_dashboard_cubit.dart",
       "norm_label": "toggleping"
     },
     {
@@ -2188,8 +2188,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_home_application_devkit_dashboard_state_dart",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 35,
+      "community_name": "devkit_dashboard_cubit.dart",
       "norm_label": "package:devkit/features/home/application/devkit_dashboard_state.dart"
     },
     {
@@ -2199,8 +2199,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_state",
-      "community": 36,
-      "community_name": "home_local_data_source.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "devkit_dashboard_state.dart"
     },
     {
@@ -2210,8 +2210,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_state_devkitdashboardstate",
-      "community": 36,
-      "community_name": "home_local_data_source.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "devkitdashboardstate"
     },
     {
@@ -2221,8 +2221,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_state_consolestate",
-      "community": 36,
-      "community_name": "home_local_data_source.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "consolestate"
     },
     {
@@ -2232,8 +2232,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_state_new",
-      "community": 36,
-      "community_name": "home_local_data_source.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "new"
     },
     {
@@ -2243,8 +2243,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_application_devkit_dashboard_state_copywith",
-      "community": 36,
-      "community_name": "home_local_data_source.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "copywith"
     },
     {
@@ -2254,8 +2254,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_home_domain_entities_console_state_entity_dart",
-      "community": 36,
-      "community_name": "home_local_data_source.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "package:devkit/features/home/domain/entities/console_state_entity.dart"
     },
     {
@@ -2408,8 +2408,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "string_get",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "string get"
     },
     {
@@ -2496,8 +2496,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_infrastructure_datasources_home_local_data_source",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 36,
+      "community_name": "home_local_data_source.dart",
       "norm_label": "home_local_data_source.dart"
     },
     {
@@ -2507,8 +2507,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_infrastructure_datasources_home_local_data_source_homelocaldatasource",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 36,
+      "community_name": "home_local_data_source.dart",
       "norm_label": "homelocaldatasource"
     },
     {
@@ -2518,8 +2518,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_infrastructure_datasources_home_local_data_source_homelocaldatasourceimpl",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 36,
+      "community_name": "home_local_data_source.dart",
       "norm_label": "homelocaldatasourceimpl"
     },
     {
@@ -2529,8 +2529,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_infrastructure_datasources_home_local_data_source_getdeviceinfo",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 36,
+      "community_name": "home_local_data_source.dart",
       "norm_label": "getdeviceinfo"
     },
     {
@@ -2540,8 +2540,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_infrastructure_datasources_home_local_data_source_new",
-      "community": 33,
-      "community_name": "home_repository_impl.dart",
+      "community": 36,
+      "community_name": "home_local_data_source.dart",
       "norm_label": "new"
     },
     {
@@ -2694,8 +2694,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_presentation_widgets_connect_command_card",
-      "community": 21,
-      "community_name": "injection_container.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "connect_command_card.dart"
     },
     {
@@ -2705,8 +2705,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_presentation_widgets_connect_command_card_connectcommandcard",
-      "community": 21,
-      "community_name": "injection_container.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "connectcommandcard"
     },
     {
@@ -2716,8 +2716,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_presentation_widgets_connect_command_card_connectcommandcardstate",
-      "community": 21,
-      "community_name": "injection_container.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "_connectcommandcardstate"
     },
     {
@@ -2727,8 +2727,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_presentation_widgets_connect_command_card_copied",
-      "community": 21,
-      "community_name": "injection_container.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "_copied"
     },
     {
@@ -2738,8 +2738,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_presentation_widgets_connect_command_card_new",
-      "community": 21,
-      "community_name": "injection_container.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "new"
     },
     {
@@ -2749,8 +2749,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_presentation_widgets_connect_command_card_createstate",
-      "community": 21,
-      "community_name": "injection_container.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "createstate"
     },
     {
@@ -2760,8 +2760,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_presentation_widgets_connect_command_card_oncopycommand",
-      "community": 21,
-      "community_name": "injection_container.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "_oncopycommand"
     },
     {
@@ -2771,8 +2771,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_presentation_widgets_connect_command_card_build",
-      "community": 21,
-      "community_name": "injection_container.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "build"
     },
     {
@@ -2782,8 +2782,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_flutter_services_dart",
-      "community": 21,
-      "community_name": "injection_container.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "package:flutter/services.dart"
     },
     {
@@ -2980,8 +2980,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_presentation_widgets_recent_actions_widget_recentactionswidget",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "recentactionswidget"
     },
     {
@@ -3024,8 +3024,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_home_presentation_widgets_recent_actions_widget_onopenlogcat",
-      "community": 20,
-      "community_name": "tools_screen.dart",
+      "community": 23,
+      "community_name": "state_toggles_card.dart",
       "norm_label": "_onopenlogcat"
     },
     {
@@ -3233,8 +3233,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_devkit_features_logcat_domain_entities_logcat_log_entity_dart",
-      "community": 9,
-      "community_name": "state_toggles_card.dart",
+      "community": 32,
+      "community_name": "logcat_cubit.dart",
       "norm_label": "package:devkit/features/logcat/domain/entities/logcat_log_entity.dart"
     },
     {
@@ -3244,8 +3244,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_application_logcat_state",
-      "community": 9,
-      "community_name": "state_toggles_card.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "logcat_state.dart"
     },
     {
@@ -3255,8 +3255,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_application_logcat_state_logcatstate",
-      "community": 9,
-      "community_name": "state_toggles_card.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "logcatstate"
     },
     {
@@ -3266,8 +3266,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_application_logcat_state_logs",
-      "community": 9,
-      "community_name": "state_toggles_card.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "logs"
     },
     {
@@ -3277,8 +3277,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "list",
-      "community": 9,
-      "community_name": "state_toggles_card.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "list"
     },
     {
@@ -3288,8 +3288,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_application_logcat_state_selectedlevel",
-      "community": 9,
-      "community_name": "state_toggles_card.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "selectedlevel"
     },
     {
@@ -3299,8 +3299,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_application_logcat_state_filterquery",
-      "community": 9,
-      "community_name": "state_toggles_card.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "filterquery"
     },
     {
@@ -3310,8 +3310,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_application_logcat_state_new",
-      "community": 9,
-      "community_name": "state_toggles_card.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "new"
     },
     {
@@ -3321,8 +3321,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_application_logcat_state_copywith",
-      "community": 9,
-      "community_name": "state_toggles_card.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "copywith"
     },
     {
@@ -3332,8 +3332,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "logcat_log_entity.dart"
     },
     {
@@ -3343,8 +3343,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_loglevel",
-      "community": 9,
-      "community_name": "state_toggles_card.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "loglevel"
     },
     {
@@ -3354,8 +3354,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_logcatlogentity",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "logcatlogentity"
     },
     {
@@ -3365,8 +3365,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_logcatlogentityx",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "logcatlogentityx"
     },
     {
@@ -3376,8 +3376,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_timestamp",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "timestamp"
     },
     {
@@ -3387,8 +3387,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_pid",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "pid"
     },
     {
@@ -3398,8 +3398,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_tid",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "tid"
     },
     {
@@ -3409,8 +3409,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_level",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "level"
     },
     {
@@ -3420,8 +3420,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_tag",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "tag"
     },
     {
@@ -3431,8 +3431,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_message",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "message"
     },
     {
@@ -3442,8 +3442,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_fulltext",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "fulltext"
     },
     {
@@ -3453,8 +3453,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_iserror",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "iserror"
     },
     {
@@ -3464,8 +3464,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "bool_get",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "bool get"
     },
     {
@@ -3475,8 +3475,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_iswarning",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "iswarning"
     },
     {
@@ -3486,8 +3486,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_entities_logcat_log_entity_new",
-      "community": 25,
-      "community_name": "package:devkit/core/theme/app_theme.dart",
+      "community": 20,
+      "community_name": "tools_screen.dart",
       "norm_label": "new"
     },
     {
@@ -3497,8 +3497,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_repositories_logcat_repository",
-      "community": 9,
-      "community_name": "state_toggles_card.dart",
+      "community": 32,
+      "community_name": "logcat_cubit.dart",
       "norm_label": "logcat_repository.dart"
     },
     {
@@ -3508,8 +3508,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_repositories_logcat_repository_logcatrepository",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 32,
+      "community_name": "logcat_cubit.dart",
       "norm_label": "logcatrepository"
     },
     {
@@ -3519,8 +3519,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_domain_repositories_logcat_repository_getinitiallogs",
-      "community": 9,
-      "community_name": "state_toggles_card.dart",
+      "community": 32,
+      "community_name": "logcat_cubit.dart",
       "norm_label": "getinitiallogs"
     },
     {
@@ -3530,8 +3530,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_infrastructure_datasources_logcat_local_data_source",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 38,
+      "community_name": "logcat_local_data_source.dart",
       "norm_label": "logcat_local_data_source.dart"
     },
     {
@@ -3541,8 +3541,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_infrastructure_datasources_logcat_local_data_source_logcatlocaldatasource",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 38,
+      "community_name": "logcat_local_data_source.dart",
       "norm_label": "logcatlocaldatasource"
     },
     {
@@ -3552,8 +3552,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_infrastructure_datasources_logcat_local_data_source_logcatlocaldatasourceimpl",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 38,
+      "community_name": "logcat_local_data_source.dart",
       "norm_label": "logcatlocaldatasourceimpl"
     },
     {
@@ -3563,8 +3563,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_infrastructure_datasources_logcat_local_data_source_getlogs",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 38,
+      "community_name": "logcat_local_data_source.dart",
       "norm_label": "getlogs"
     },
     {
@@ -3574,8 +3574,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_infrastructure_datasources_logcat_local_data_source_new",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 38,
+      "community_name": "logcat_local_data_source.dart",
       "norm_label": "new"
     },
     {
@@ -3585,8 +3585,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_infrastructure_repositories_logcat_repository_impl",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "logcat_repository_impl.dart"
     },
     {
@@ -3596,8 +3596,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_infrastructure_repositories_logcat_repository_impl_logcatrepositoryimpl",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 32,
+      "community_name": "logcat_cubit.dart",
       "norm_label": "logcatrepositoryimpl"
     },
     {
@@ -3607,8 +3607,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_infrastructure_repositories_logcat_repository_impl_localdatasource",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "localdatasource"
     },
     {
@@ -3618,8 +3618,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_infrastructure_repositories_logcat_repository_impl_new",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "new"
     },
     {
@@ -3629,8 +3629,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_logcat_infrastructure_repositories_logcat_repository_impl_getinitiallogs",
-      "community": 6,
-      "community_name": "connect_command_card.dart",
+      "community": 21,
+      "community_name": "injection_container.dart",
       "norm_label": "getinitiallogs"
     },
     {
@@ -4886,17 +4886,6 @@
       "community": 2,
       "community_name": "devkit_console_screen.dart",
       "norm_label": "focusnode"
-    },
-    {
-      "label": "new",
-      "file_type": "code",
-      "source_file": "lib/features/tools/presentation/widgets/pro_paywall_sheet/paywall_custom_amount_input.dart",
-      "source_location": null,
-      "_origin": "ast",
-      "id": "lib_features_tools_presentation_widgets_pro_paywall_sheet_paywall_custom_amount_input_new",
-      "community": 2,
-      "community_name": "devkit_console_screen.dart",
-      "norm_label": "new"
     },
     {
       "label": "_onAmountChanged",
@@ -13597,17 +13586,6 @@
       "_origin": "ast",
       "source": "lib_features_tools_presentation_widgets_pro_paywall_sheet_paywall_custom_amount_input",
       "target": "lib_features_tools_presentation_widgets_pro_paywall_sheet_paywall_custom_amount_input_focusnode"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/features/tools/presentation/widgets/pro_paywall_sheet/paywall_custom_amount_input.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "lib_features_tools_presentation_widgets_pro_paywall_sheet_paywall_custom_amount_input",
-      "target": "lib_features_tools_presentation_widgets_pro_paywall_sheet_paywall_custom_amount_input_new"
     },
     {
       "relation": "defines",

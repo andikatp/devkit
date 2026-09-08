@@ -55,7 +55,7 @@ class RecentActionsWidget extends StatelessWidget {
           ),
         ),
         backgroundColor: AppColors.cyberDark,
-        behavior: SnackBarBehavior.floating,
+        behavior: .floating,
         duration: const Duration(seconds: 2),
       ),
     );
@@ -63,12 +63,14 @@ class RecentActionsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final consoleState =
-        context.watch<DevKitDashboardCubit>().state.consoleState;
+    final consoleState = context
+        .watch<DevKitDashboardCubit>()
+        .state
+        .consoleState;
 
     return Column(
       crossAxisAlignment: .start,
-      spacing: 8,
+      spacing: 16,
       children: [
         Row(
           mainAxisAlignment: .spaceBetween,
@@ -94,23 +96,20 @@ class RecentActionsWidget extends StatelessWidget {
                 ),
               ],
             ),
-            DecoratedBox(
-              decoration: const BoxDecoration(
-                color: AppColors.cyberCard,
-                borderRadius: .all(.circular(4)),
-                border: .fromBorderSide(
-                  BorderSide(color: AppColors.cyberBorder),
-                ),
+            Container(
+              padding: const .symmetric(horizontal: 8, vertical: 2),
+              decoration: BoxDecoration(
+                color: AppColors.cyberCardDeep,
+                borderRadius: .circular(4),
+                border: .all(color: AppColors.cyberBorder),
               ),
-              child: Padding(
-                padding: const .symmetric(horizontal: 6, vertical: 2),
-                child: Text(
-                  '[ 4 ]',
-                  style: context.labelSmall.copyWith(
-                    color: AppColors.cyanBright,
-                    fontSize: 10,
-                    fontWeight: .bold,
-                  ),
+              child: Text(
+                'SHORTCUTS',
+                style: context.labelSmall.copyWith(
+                  color: AppColors.cyanBright,
+                  fontSize: 10,
+                  fontWeight: .bold,
+                  letterSpacing: 0.5,
                 ),
               ),
             ),
@@ -174,9 +173,7 @@ class RecentActionsWidget extends StatelessWidget {
             ),
           ],
         ),
-        if (consoleState.isPingActive) ...[
-          const PingStatusCardWidget(),
-        ],
+        if (consoleState.isPingActive) ...[const PingStatusCardWidget()],
       ],
     );
   }

@@ -11,6 +11,7 @@ metadata:
 - [Architectural Layers](#architectural-layers)
 - [Project Structure](#project-structure)
 - [Workflow: Implementing a New Feature](#workflow-implementing-a-new-feature)
+- [Refactoring & Quality Rules](#refactoring--quality-rules)
 - [Examples](#examples)
 
 ## Architectural Layers
@@ -72,6 +73,12 @@ Follow this sequential workflow when adding a new feature to the application. Co
 - [ ] **Step 6: Implement Presentation Layer.** Create `screens` and `widgets` inside `presentation/`. Use `BlocBuilder` or similar to listen to state changes from the Application layer.
 - [ ] **Step 7: Inject Dependencies.** Register the new datasources, repositories, and Cubits in the dependency injection container (e.g., `get_it`).
 - [ ] **Step 8: Run Validator.** Execute unit tests for the Application and Infrastructure layers.
+
+## Refactoring & Quality Rules
+
+When reviewing or refactoring existing code, enforce the project's refactoring guidelines:
+- Refer to `.agents/rules/flutter-refactoring-rules.md` for specific architectural and presentation layer rules (e.g. `spacing:` parameter, event handler extraction above `build()`, 250 line limits, dot shorthand syntax, one widget class per file, domain entity extensions, stateless domain services).
+- Use the `flutter-refactor-clean-architecture` skill (`.agents/skills/flutter-refactor-clean-architecture/SKILL.md`) for full refactoring checklists and code conversion examples.
 
 ## Examples
 
