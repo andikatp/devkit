@@ -73,7 +73,7 @@ class _ProPaywallSheetState extends State<ProPaywallSheet> {
           ],
         ),
         backgroundColor: AppColors.cyberDark,
-        behavior: .floating,
+        behavior: .fixed,
       ),
     );
     Navigator.of(context).pop(true);
@@ -148,14 +148,9 @@ class _ProPaywallSheetState extends State<ProPaywallSheet> {
                           ),
                         ),
                         Container(
-                          padding: const .symmetric(
-                            horizontal: 6,
-                            vertical: 2,
-                          ),
+                          padding: const .symmetric(horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
-                            color: AppColors.cyberAmber.withValues(
-                              alpha: 0.2,
-                            ),
+                            color: AppColors.cyberAmber.withValues(alpha: 0.2),
                             borderRadius: .circular(4),
                             border: .all(
                               color: AppColors.cyberAmber.withValues(
@@ -218,8 +213,7 @@ class _ProPaywallSheetState extends State<ProPaywallSheet> {
                 PaywallTierOptionCard(
                   index: 2,
                   title: 'Custom Amount',
-                  subtitle:
-                      'Enter any donation amount to support DevKit',
+                  subtitle: 'Enter any donation amount to support DevKit',
                   badgeText: 'LIFETIME',
                   isSelected: state.selectedTier == 2,
                   onTap: () => _onSelectTier(context, 2),
@@ -240,9 +234,7 @@ class _ProPaywallSheetState extends State<ProPaywallSheet> {
                       backgroundColor: AppColors.cyberAmber,
                       foregroundColor: Colors.black,
                       padding: const .symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: .circular(6),
-                      ),
+                      shape: RoundedRectangleBorder(borderRadius: .circular(6)),
                       elevation: 6,
                     ),
                     child: Row(
@@ -250,9 +242,7 @@ class _ProPaywallSheetState extends State<ProPaywallSheet> {
                       children: [
                         Text(
                           '⚡ ',
-                          style: context.bodyMedium.copyWith(
-                            fontSize: 14,
-                          ),
+                          style: context.bodyMedium.copyWith(fontSize: 14),
                         ),
                         Text(
                           'DONATE ${state.formattedSelectedPrice} '
