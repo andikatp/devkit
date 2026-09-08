@@ -1,7 +1,10 @@
 import 'package:devkit/core/extensions/text_theme.dart';
 import 'package:devkit/core/services/device_info_service.dart';
 import 'package:devkit/core/theme/app_theme.dart';
+import 'package:devkit/features/home/application/devkit_dashboard_cubit.dart';
+import 'package:devkit/features/permissions/presentation/screens/permissions_setup_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HeaderWidget extends StatefulWidget {
   const new({super.key});
@@ -12,7 +15,6 @@ class HeaderWidget extends StatefulWidget {
 
 class _HeaderWidgetState extends State<HeaderWidget> {
   late final Future<DeviceInfoData> _deviceInfoFuture;
-  bool _isAdbGranted = true;
 
   @override
   void initState() {
@@ -20,12 +22,19 @@ class _HeaderWidgetState extends State<HeaderWidget> {
     _deviceInfoFuture = DeviceInfoService.getDeviceInfo();
   }
 
-  void _onToggleGrantMode() {
-    setState(() => _isAdbGranted = !_isAdbGranted);
+  Future<void> _onOpenPermissions(BuildContext context) async {
+    final cubit = context.read<DevKitDashboardCubit>();
+    await PermissionsSetupScreen.show(context);
+    if (context.mounted) {
+      await cubit.checkPermissions();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<DevKitDashboardCubit>();
+    final isAdbGranted = cubit.state.consoleState.isAdbGrantMode;
+
     return FutureBuilder<DeviceInfoData>(
       future: _deviceInfoFuture,
       builder: (context, snapshot) {
@@ -60,49 +69,48 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   ],
                 ),
                 InkWell(
-                  onTap: _onToggleGrantMode,
+                  onTap: () => _onOpenPermissions(context),
                   borderRadius: .circular(6),
                   child: Container(
                     padding: const .symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      color: _isAdbGranted
+                      color: isAdbGranted
                           ? AppColors.cyanBright.withValues(alpha: 0.15)
-                          : AppColors.cyberCardAlt,
+                          : AppColors.cyberAmber.withValues(alpha: 0.15),
                       borderRadius: .circular(4),
                       border: Border.all(
-                        color: _isAdbGranted
+                        color: isAdbGranted
                             ? AppColors.cyanBright.withValues(alpha: 0.8)
-                            : AppColors.cyberBorder,
+                            : AppColors.cyberAmber.withValues(alpha: 0.8),
                       ),
-                      boxShadow: _isAdbGranted
-                          ? [
-                              BoxShadow(
-                                color: AppColors.cyanBright.withValues(
-                                  alpha: 0.3,
-                                ),
-                                blurRadius: 8,
-                              ),
-                            ]
-                          : null,
+                      boxShadow: [
+                        BoxShadow(
+                          color: isAdbGranted
+                              ? AppColors.cyanBright.withValues(alpha: 0.3)
+                              : AppColors.cyberAmber.withValues(alpha: 0.3),
+                          blurRadius: 8,
+                        ),
+                      ],
                     ),
                     child: Row(
                       mainAxisSize: .min,
+                      spacing: 4,
                       children: [
                         Text(
-                          '⚡ ',
+                          isAdbGranted ? '⚡ ' : '⚠ ',
                           style: context.bodySmall.copyWith(
-                            color: _isAdbGranted
+                            color: isAdbGranted
                                 ? AppColors.cyanBright
-                                : AppColors.cyberMuted,
+                                : AppColors.cyberAmber,
                             fontSize: 10,
                           ),
                         ),
                         Text(
-                          _isAdbGranted ? 'ADB GRANTED' : 'ADB REQUIRED',
+                          isAdbGranted ? 'ADB GRANTED' : 'SETUP REQUIRED',
                           style: context.labelSmall.copyWith(
-                            color: _isAdbGranted
+                            color: isAdbGranted
                                 ? AppColors.cyanBright
-                                : AppColors.cyberMuted,
+                                : AppColors.cyberAmber,
                             fontSize: 10,
                             fontWeight: .bold,
                             letterSpacing: 0.5,

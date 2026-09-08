@@ -139,6 +139,7 @@ class StateTogglesCard extends StatelessWidget {
   }) {
     return Row(
       mainAxisAlignment: .spaceBetween,
+      spacing: 8,
       children: [
         Expanded(
           child: Row(
@@ -188,7 +189,6 @@ class StateTogglesCard extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(width: 8),
         Switch.adaptive(
           value: value,
           onChanged: onChanged,

@@ -17,7 +17,7 @@ class RecentActionsWidget extends StatelessWidget {
   void _onToggleDevMode(BuildContext context) {
     final cubit = context.read<DevKitDashboardCubit>();
     final currentVal = cubit.state.consoleState.isDevOptionsOn;
-    cubit.toggleDevOptions(value: !currentVal);
+    unawaited(cubit.toggleDevOptions(value: !currentVal));
 
     _showSnackBar(
       context,

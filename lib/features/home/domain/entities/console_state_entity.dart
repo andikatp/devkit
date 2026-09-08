@@ -51,6 +51,6 @@ extension ConsoleStateEntityX on ConsoleStateEntity {
   String get modeText => isAdbGrantMode ? 'DIRECT' : 'SHORTCUT';
   String get footnoteText => isAdbGrantMode
       ? 'Flips instantly — DevKit holds SETTINGS'
-      : 'Free Mode — Opens system page via INTENT SHORTCUT';
+      : 'Opens system page via INTENT SHORTCUT';
   String get adbConnectCommand => 'adb connect $deviceIp:$devicePort';
 }
