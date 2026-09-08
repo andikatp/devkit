@@ -3,10 +3,7 @@ import 'package:devkit/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class PingStatusCardWidget extends StatelessWidget {
-  const new({
-    this.targetHost = 'google.com (8.8.8.8)',
-    super.key,
-  });
+  const new({this.targetHost = 'google.com (8.8.8.8)', super.key});
 
   final String targetHost;
 
@@ -18,9 +15,7 @@ class PingStatusCardWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.cyberCardAlt.withValues(alpha: 0.9),
         borderRadius: .circular(8),
-        border: Border.all(
-          color: AppColors.cyberAmber.withValues(alpha: 0.6),
-        ),
+        border: .all(color: AppColors.cyberAmber.withValues(alpha: 0.6)),
         boxShadow: [
           BoxShadow(
             color: AppColors.cyberAmber.withValues(alpha: 0.15),
@@ -42,13 +37,10 @@ class PingStatusCardWidget extends StatelessWidget {
                     width: 8,
                     height: 8,
                     decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
+                      shape: .circle,
                       color: AppColors.cyberEmerald,
                       boxShadow: [
-                        BoxShadow(
-                          color: AppColors.cyberEmerald,
-                          blurRadius: 6,
-                        ),
+                        BoxShadow(color: AppColors.cyberEmerald, blurRadius: 6),
                       ],
                     ),
                   ),

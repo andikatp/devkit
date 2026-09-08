@@ -20,3 +20,8 @@ class LogcatLogEntity {
   String get fullText =>
       '$timestamp $pid $tid ${level.name[0].toUpperCase()} $tag: $message';
 }
+
+extension LogcatLogEntityX on LogcatLogEntity {
+  bool get isError => level == LogLevel.error;
+  bool get isWarning => level == LogLevel.warn;
+}

@@ -15,9 +15,9 @@ class DevKitDashboardView extends StatelessWidget {
     return BlocProvider(
       create: (_) => sl<DevKitDashboardCubit>(),
       child: const SingleChildScrollView(
-        padding: .symmetric(horizontal: 16, vertical: 8),
+        padding: .all(16),
         child: Column(
-          spacing: 24,
+          spacing: 28,
           children: [
             HeaderWidget(),
             RecentActionsWidget(),

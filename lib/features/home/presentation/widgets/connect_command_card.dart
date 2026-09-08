@@ -36,7 +36,7 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
 
     return Column(
       crossAxisAlignment: .start,
-      spacing: 12,
+      spacing: 16,
       children: [
         Row(
           mainAxisAlignment: .spaceBetween,
@@ -67,7 +67,7 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
               decoration: BoxDecoration(
                 color: AppColors.cyberCardDeep,
                 borderRadius: .circular(4),
-                border: Border.all(color: AppColors.cyberBorder),
+                border: .all(color: AppColors.cyberBorder),
               ),
               child: Text(
                 'MDNS',
@@ -93,7 +93,7 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
             backgroundColor: AppColors.cyberCard,
             borderRadius: 8,
             borderSide: BorderSide(color: AppColors.cyberBorder),
-            padding: EdgeInsets.all(14),
+            padding: .all(14),
           ),
           child: Column(
             crossAxisAlignment: .start,
@@ -113,7 +113,7 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
                 decoration: BoxDecoration(
                   color: AppColors.cyberBlack.withValues(alpha: 0.9),
                   borderRadius: .circular(6),
-                  border: Border.all(
+                  border: .all(
                     color: AppColors.cyberBorder.withValues(alpha: 0.7),
                   ),
                 ),
@@ -142,7 +142,7 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
                         decoration: BoxDecoration(
                           color: AppColors.deepBlue.withValues(alpha: 0.3),
                           borderRadius: .circular(4),
-                          border: Border.all(
+                          border: .all(
                             color: AppColors.cyberBorder.withValues(alpha: 0.7),
                           ),
                         ),

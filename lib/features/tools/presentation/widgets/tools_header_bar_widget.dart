@@ -34,7 +34,7 @@ class ToolsHeaderBarWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.cyberAmber.withValues(alpha: 0.2),
             borderRadius: .circular(4),
-            border: Border.all(
+            border: .all(
               color: AppColors.cyberAmber.withValues(alpha: 0.5),
             ),
           ),

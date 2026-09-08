@@ -7,6 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LogcatHeaderBarWidget extends StatelessWidget {
   const new({super.key});
 
+  void _onClearLogs(BuildContext context) {
+    context.read<LogcatCubit>().clearLogs();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -37,13 +41,10 @@ class LogcatHeaderBarWidget extends StatelessWidget {
               width: 8,
               height: 8,
               decoration: const BoxDecoration(
-                shape: BoxShape.circle,
+                shape: .circle,
                 color: AppColors.cyberEmerald,
                 boxShadow: [
-                  BoxShadow(
-                    color: AppColors.cyberEmerald,
-                    blurRadius: 6,
-                  ),
+                  BoxShadow(color: AppColors.cyberEmerald, blurRadius: 6),
                 ],
               ),
             ),
@@ -59,7 +60,7 @@ class LogcatHeaderBarWidget extends StatelessWidget {
           ],
         ),
         IconButton(
-          onPressed: () => context.read<LogcatCubit>().clearLogs(),
+          onPressed: () => _onClearLogs(context),
           icon: const Icon(
             Icons.delete_outline,
             color: AppColors.cyberMuted,

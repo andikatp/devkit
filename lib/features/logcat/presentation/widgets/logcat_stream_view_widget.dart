@@ -25,17 +25,14 @@ class LogcatStreamViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filteredLogs =
-        context.watch<LogcatCubit>().state.filteredLogs;
+    final filteredLogs = context.watch<LogcatCubit>().state.filteredLogs;
 
     return Container(
       padding: const .all(10),
       decoration: BoxDecoration(
         color: AppColors.cyberBlack.withValues(alpha: 0.75),
         borderRadius: .circular(8),
-        border: Border.all(
-          color: AppColors.cyberBorder.withValues(alpha: 0.5),
-        ),
+        border: .all(color: AppColors.cyberBorder.withValues(alpha: 0.5)),
       ),
       child: ListView.builder(
         itemCount: filteredLogs.length,

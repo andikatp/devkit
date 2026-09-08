@@ -25,7 +25,7 @@ class ToolSwitchCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.cyberCard,
         borderRadius: .circular(8),
-        border: Border.all(color: AppColors.cyberBorder),
+        border: .all(color: AppColors.cyberBorder),
       ),
       child: Row(
         mainAxisAlignment: .spaceBetween,

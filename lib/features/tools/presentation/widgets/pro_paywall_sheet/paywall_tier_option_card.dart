@@ -34,7 +34,7 @@ class PaywallTierOptionCard extends StatelessWidget {
               ? AppColors.deepBlue.withValues(alpha: 0.2)
               : AppColors.cyberCardAlt,
           borderRadius: .circular(6),
-          border: Border.all(
+          border: .all(
             color: isSelected ? AppColors.cyanBright : AppColors.cyberBorder,
             width: isSelected ? 2 : 1,
           ),
@@ -122,9 +122,7 @@ class PaywallTierOptionCard extends StatelessWidget {
             Text(
               badgeText,
               style: context.labelSmall.copyWith(
-                color: isSelected
-                    ? AppColors.cyanBright
-                    : AppColors.cyberMuted,
+                color: isSelected ? AppColors.cyanBright : AppColors.cyberMuted,
                 fontSize: 10,
                 fontWeight: .bold,
                 fontFamily: 'monospace',

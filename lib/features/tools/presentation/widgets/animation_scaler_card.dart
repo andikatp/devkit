@@ -7,17 +7,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AnimationScalerCard extends StatelessWidget {
   const new({super.key});
 
+  void _onSelectScale(BuildContext context, double scale) {
+    context.read<ToolsCubit>().setAnimationScale(scale: scale);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final currentScale =
-        context.watch<ToolsCubit>().state.animationScale;
+    final currentScale = context.watch<ToolsCubit>().state.animationScale;
 
     return Container(
       padding: const .all(12),
       decoration: BoxDecoration(
         color: AppColors.cyberCard,
         borderRadius: .circular(8),
-        border: Border.all(color: AppColors.cyberBorder),
+        border: .all(color: AppColors.cyberBorder),
       ),
       child: Column(
         crossAxisAlignment: .start,
@@ -82,10 +85,10 @@ class AnimationScalerCard extends StatelessWidget {
                 ),
                 onSelected: (val) {
                   if (val) {
-                    context.read<ToolsCubit>().setAnimationScale(scale: scale);
+                    _onSelectScale(context, scale);
                   }
                 },
-                visualDensity: VisualDensity.compact,
+                visualDensity: .compact,
               );
             }).toList(),
           ),
