@@ -1,6 +1,7 @@
 import 'package:devkit/core/extensions/text_theme.dart';
 import 'package:devkit/core/theme/app_theme.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_cubit.dart';
+import 'package:devkit/features/home/domain/entities/console_state_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,10 +10,10 @@ class PingStatusCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final consoleState = context
-        .watch<DevKitDashboardCubit>()
-        .state
-        .consoleState;
+    final consoleState =
+        context.select<DevKitDashboardCubit, ConsoleStateEntity>(
+      (c) => c.state.consoleState,
+    );
     const host = 'google.com (8.8.8.8)';
 
     return Container(

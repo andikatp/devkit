@@ -149,7 +149,7 @@ class StateTogglesCard extends StatelessWidget {
                 width: 10,
                 height: 10,
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                  shape: .circle,
                   color: value ? AppColors.cyanBright : AppColors.cyberRed,
                   boxShadow: [
                     BoxShadow(

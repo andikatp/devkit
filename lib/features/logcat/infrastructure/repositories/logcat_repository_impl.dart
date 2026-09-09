@@ -11,4 +11,9 @@ class LogcatRepositoryImpl implements LogcatRepository {
   Future<List<LogcatLogEntity>> getInitialLogs() {
     return localDataSource.getLogs();
   }
+
+  @override
+  Stream<LogcatLogEntity> streamLogs() {
+    return localDataSource.streamLogs();
+  }
 }
