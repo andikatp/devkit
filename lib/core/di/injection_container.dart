@@ -20,7 +20,7 @@ Future<void> initServiceLocator() async {
   // Datasources
   sl
     ..registerLazySingleton<HomeLocalDataSource>(
-      HomeLocalDataSourceImpl.new,
+      () => const HomeLocalDataSourceImpl(),
     )
     ..registerLazySingleton<LogcatLocalDataSource>(
       LogcatLocalDataSourceImpl.new,

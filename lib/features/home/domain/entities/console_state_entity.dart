@@ -9,6 +9,10 @@ class ConsoleStateEntity {
     required this.deviceModel,
     required this.sdkVersion,
     this.isPingActive = false,
+    this.rttMs = 0.0,
+    this.packetsSent = 0,
+    this.packetsReceived = 0,
+    this.packetLossPercent = 0.0,
   });
 
   final bool isDevOptionsOn;
@@ -20,6 +24,10 @@ class ConsoleStateEntity {
   final String deviceModel;
   final int sdkVersion;
   final bool isPingActive;
+  final double rttMs;
+  final int packetsSent;
+  final int packetsReceived;
+  final double packetLossPercent;
 
   ConsoleStateEntity copyWith({
     bool? isDevOptionsOn,
@@ -31,6 +39,10 @@ class ConsoleStateEntity {
     String? deviceModel,
     int? sdkVersion,
     bool? isPingActive,
+    double? rttMs,
+    int? packetsSent,
+    int? packetsReceived,
+    double? packetLossPercent,
   }) {
     return ConsoleStateEntity(
       isDevOptionsOn: isDevOptionsOn ?? this.isDevOptionsOn,
@@ -43,6 +55,10 @@ class ConsoleStateEntity {
       deviceModel: deviceModel ?? this.deviceModel,
       sdkVersion: sdkVersion ?? this.sdkVersion,
       isPingActive: isPingActive ?? this.isPingActive,
+      rttMs: rttMs ?? this.rttMs,
+      packetsSent: packetsSent ?? this.packetsSent,
+      packetsReceived: packetsReceived ?? this.packetsReceived,
+      packetLossPercent: packetLossPercent ?? this.packetLossPercent,
     );
   }
 }

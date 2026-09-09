@@ -1,14 +1,20 @@
 import 'package:devkit/core/extensions/text_theme.dart';
 import 'package:devkit/core/theme/app_theme.dart';
+import 'package:devkit/features/home/application/devkit_dashboard_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PingStatusCardWidget extends StatelessWidget {
-  const new({this.targetHost = 'google.com (8.8.8.8)', super.key});
-
-  final String targetHost;
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final consoleState = context
+        .watch<DevKitDashboardCubit>()
+        .state
+        .consoleState;
+    const host = 'google.com (8.8.8.8)';
+
     return Container(
       width: double.infinity,
       padding: const .all(12),
@@ -69,7 +75,7 @@ class PingStatusCardWidget extends StatelessWidget {
             mainAxisAlignment: .spaceBetween,
             children: [
               Text(
-                'HOST: $targetHost',
+                'HOST: $host',
                 style: context.bodySmall.copyWith(
                   color: Colors.white,
                   fontSize: 11,
@@ -78,7 +84,7 @@ class PingStatusCardWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                'RTT: 14.2ms',
+                'RTT: ${consoleState.rttMs.toStringAsFixed(1)}ms',
                 style: context.bodySmall.copyWith(
                   color: AppColors.cyanBright,
                   fontSize: 11,
@@ -92,7 +98,8 @@ class PingStatusCardWidget extends StatelessWidget {
             mainAxisAlignment: .spaceBetween,
             children: [
               Text(
-                'PACKETS: 18 SENT / 18 RECV',
+                'PACKETS: ${consoleState.packetsSent} SENT / '
+                '${consoleState.packetsReceived} RECV',
                 style: context.labelSmall.copyWith(
                   color: AppColors.cyberMuted,
                   fontSize: 10,
@@ -100,9 +107,11 @@ class PingStatusCardWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                '0% LOSS',
+                '${consoleState.packetLossPercent.toStringAsFixed(0)}% LOSS',
                 style: context.labelSmall.copyWith(
-                  color: AppColors.cyberEmerald,
+                  color: consoleState.packetLossPercent == 0
+                      ? AppColors.cyberEmerald
+                      : AppColors.cyberRed,
                   fontSize: 10,
                   fontFamily: 'monospace',
                   fontWeight: .bold,
