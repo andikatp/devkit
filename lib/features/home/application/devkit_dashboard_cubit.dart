@@ -9,10 +9,8 @@ import 'package:devkit/features/home/domain/repositories/home_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
-  new({
-    required this.homeRepository,
-    DevKitDashboardState? initialState,
-  }) : super(initialState ?? const .new()) {
+  new({required this.homeRepository, DevKitDashboardState? initialState})
+    : super(initialState ?? const .new()) {
     unawaited(_initDashboard());
   }
 
@@ -22,7 +20,8 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
 
   Future<void> _initDashboard() async {
     final infoResult = await homeRepository.getDeviceInfo();
-    final info = infoResult.data ??
+    final info =
+        infoResult.data ??
         const DeviceInfoData(
           brand: 'Unknown',
           model: 'Device',
@@ -31,11 +30,9 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
         );
 
     final settingsResult = await homeRepository.getSystemSettings();
-    final systemSettings =
-        settingsResult.data ?? SystemSettingsData.fallback;
+    final systemSettings = settingsResult.data ?? SystemSettingsData.fallback;
 
-    final isAdbGranted =
-        await PermissionService.isWriteSecureSettingsGranted();
+    final isAdbGranted = await PermissionService.isWriteSecureSettingsGranted();
 
     emit(
       state.copyWith(
@@ -78,11 +75,9 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
   }
 
   Future<void> checkPermissions() async {
-    final isAdbGranted =
-        await PermissionService.isWriteSecureSettingsGranted();
+    final isAdbGranted = await PermissionService.isWriteSecureSettingsGranted();
     final settingsResult = await homeRepository.getSystemSettings();
-    final systemSettings =
-        settingsResult.data ?? SystemSettingsData.fallback;
+    final systemSettings = settingsResult.data ?? SystemSettingsData.fallback;
 
     emit(
       state.copyWith(
@@ -112,17 +107,14 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
     final result = await homeRepository.setDevOptions(enabled: value);
     if (result.isFailure || result.data != true) {
       emit(
-        state.copyWith(
-          errorMessage: result.failure?.message ?? _blockedMsg,
-        ),
+        state.copyWith(errorMessage: result.failure?.message ?? _blockedMsg),
       );
       return;
     }
     emit(
       state.copyWith(
         consoleState: state.consoleState.copyWith(isDevOptionsOn: value),
-        successMessage:
-            'Developer Options ${value ? 'ENABLED' : 'DISABLED'}',
+        successMessage: 'Developer Options ${value ? 'ENABLED' : 'DISABLED'}',
       ),
     );
   }
@@ -139,9 +131,7 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
     final result = await homeRepository.setUsbDebugging(enabled: value);
     if (result.isFailure || result.data != true) {
       emit(
-        state.copyWith(
-          errorMessage: result.failure?.message ?? _blockedMsg,
-        ),
+        state.copyWith(errorMessage: result.failure?.message ?? _blockedMsg),
       );
       return;
     }
@@ -166,18 +156,14 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
     final result = await homeRepository.setWirelessDebugging(enabled: value);
     if (result.isFailure || result.data != true) {
       emit(
-        state.copyWith(
-          errorMessage: result.failure?.message ?? _blockedMsg,
-        ),
+        state.copyWith(errorMessage: result.failure?.message ?? _blockedMsg),
       );
       return;
     }
     emit(
       state.copyWith(
-        consoleState:
-            state.consoleState.copyWith(isWirelessDebuggingOn: value),
-        successMessage:
-            'Wireless Debugging ${value ? 'ENABLED' : 'DISABLED'}',
+        consoleState: state.consoleState.copyWith(isWirelessDebuggingOn: value),
+        successMessage: 'Wireless Debugging ${value ? 'ENABLED' : 'DISABLED'}',
       ),
     );
   }

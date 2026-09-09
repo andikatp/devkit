@@ -7,6 +7,8 @@ import 'package:devkit/features/logcat/application/logcat_cubit.dart';
 import 'package:devkit/features/logcat/domain/repositories/logcat_repository.dart';
 import 'package:devkit/features/logcat/infrastructure/datasources/logcat_local_data_source.dart';
 import 'package:devkit/features/logcat/infrastructure/repositories/logcat_repository_impl.dart';
+import 'package:devkit/features/paywall/domain/repositories/iap_repository.dart';
+import 'package:devkit/features/paywall/infrastructure/repositories/iap_repository_impl.dart';
 import 'package:devkit/features/tools/application/paywall_cubit.dart';
 import 'package:devkit/features/tools/application/tools_cubit.dart';
 import 'package:devkit/features/tools/domain/repositories/tools_repository.dart';
@@ -39,6 +41,9 @@ Future<void> initServiceLocator() async {
     )
     ..registerLazySingleton<ToolsRepository>(
       () => ToolsRepositoryImpl(localDataSource: sl()),
+    )
+    ..registerLazySingleton<IapRepository>(
+      IapRepositoryImpl.new,
     );
 
   // Cubits / Application Layer
@@ -53,7 +58,7 @@ Future<void> initServiceLocator() async {
       () => ToolsCubit(toolsRepository: sl()),
     )
     ..registerFactory<PaywallCubit>(
-      PaywallCubit.new,
+      () => PaywallCubit(iapRepository: sl()),
     )
     ..registerFactory<ConsoleNavigationCubit>(
       ConsoleNavigationCubit.new,
