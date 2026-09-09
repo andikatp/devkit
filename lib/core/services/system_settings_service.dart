@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:devkit/core/utils/safe_call.dart';
 import 'package:flutter/services.dart';
 
 class SystemSettingsData {
@@ -27,9 +28,11 @@ abstract final class SystemSettingsService {
   static const MethodChannel _channel =
       MethodChannel('com.andikatp.devkit/settings');
 
-  static Future<SystemSettingsData> getSystemSettings() async {
-    if (!Platform.isAndroid) return SystemSettingsData.fallback;
-    try {
+  static Future<Result<SystemSettingsData>> getSystemSettings() {
+    if (!Platform.isAndroid) {
+      return Future.value(const Result.success(SystemSettingsData.fallback));
+    }
+    return safeCall(() async {
       final res =
           await _channel.invokeMapMethod<String, dynamic>('getSystemSettings');
       if (res == null) return SystemSettingsData.fallback;
@@ -40,41 +43,69 @@ abstract final class SystemSettingsService {
         isWirelessDebuggingOn: (res['isWirelessDebuggingOn'] as bool?) ?? false,
         adbPort: (res['adbPort'] as int?) ?? 5555,
       );
-    } on Exception catch (_) {
-      return SystemSettingsData.fallback;
-    }
+    });
   }
 
-  static Future<bool> setDevOptions({required bool enabled}) async {
-    if (!Platform.isAndroid) return false;
-    try {
-      final res = await _channel
-          .invokeMethod<bool>('setDevOptions', {'enabled': enabled});
-      return res ?? false;
-    } on Exception catch (_) {
-      return false;
+  static Future<Result<bool>> _invokeBoolSetting(
+    String method,
+    Map<String, dynamic> args,
+  ) {
+    if (!Platform.isAndroid) {
+      return Future.value(const Result.success(false));
     }
+    return safeCall(() async {
+      final res = await _channel.invokeMethod<bool>(method, args);
+      return res ?? false;
+    });
   }
 
-  static Future<bool> setUsbDebugging({required bool enabled}) async {
-    if (!Platform.isAndroid) return false;
-    try {
-      final res = await _channel
-          .invokeMethod<bool>('setUsbDebugging', {'enabled': enabled});
-      return res ?? false;
-    } on Exception catch (_) {
-      return false;
+  static Future<Result<Map<String, dynamic>>> getToolsStateMap() {
+    if (!Platform.isAndroid) {
+      return Future.value(const Result.success(<String, dynamic>{}));
     }
+    return safeCall(() async {
+      final res =
+          await _channel.invokeMapMethod<String, dynamic>('getToolsState');
+      return res ?? <String, dynamic>{};
+    });
   }
 
-  static Future<bool> setWirelessDebugging({required bool enabled}) async {
-    if (!Platform.isAndroid) return false;
-    try {
-      final res = await _channel
-          .invokeMethod<bool>('setWirelessDebugging', {'enabled': enabled});
-      return res ?? false;
-    } on Exception catch (_) {
-      return false;
-    }
-  }
+  static Future<Result<bool>> setDevOptions({required bool enabled}) =>
+      _invokeBoolSetting('setDevOptions', {'enabled': enabled});
+
+  static Future<Result<bool>> setUsbDebugging({required bool enabled}) =>
+      _invokeBoolSetting('setUsbDebugging', {'enabled': enabled});
+
+  static Future<Result<bool>> setWirelessDebugging({required bool enabled}) =>
+      _invokeBoolSetting('setWirelessDebugging', {'enabled': enabled});
+
+  static Future<Result<bool>> setLayoutBounds({required bool enabled}) =>
+      _invokeBoolSetting('setLayoutBounds', {'enabled': enabled});
+
+  static Future<Result<bool>> setShowTaps({required bool enabled}) =>
+      _invokeBoolSetting('setShowTaps', {'enabled': enabled});
+
+  static Future<Result<bool>> setPointerLocation({required bool enabled}) =>
+      _invokeBoolSetting('setPointerLocation', {'enabled': enabled});
+
+  static Future<Result<bool>> setStayAwake({required bool enabled}) =>
+      _invokeBoolSetting('setStayAwake', {'enabled': enabled});
+
+  static Future<Result<bool>> setAnimationScale({required double scale}) =>
+      _invokeBoolSetting('setAnimationScale', {'scale': scale});
+
+  static Future<Result<bool>> setDemoMode({required bool enabled}) =>
+      _invokeBoolSetting('setDemoMode', {'enabled': enabled});
+
+  static Future<Result<bool>> setForceDarkMode({required bool enabled}) =>
+      _invokeBoolSetting('setForceDarkMode', {'enabled': enabled});
+
+  static Future<Result<bool>> setFontScale({required double scale}) =>
+      _invokeBoolSetting('setFontScale', {'scale': scale});
+
+  static Future<Result<bool>> setGpuProfiling({required bool enabled}) =>
+      _invokeBoolSetting('setGpuProfiling', {'enabled': enabled});
+
+  static Future<Result<bool>> setStrictMode({required bool enabled}) =>
+      _invokeBoolSetting('setStrictMode', {'enabled': enabled});
 }

@@ -1,4 +1,5 @@
 import 'package:devkit/features/logcat/domain/entities/logcat_log_entity.dart';
+import 'package:devkit/features/logcat/domain/services/logcat_parser_service.dart';
 
 class LogcatState {
   new({
@@ -27,13 +28,11 @@ class LogcatState {
     LogLevel selectedLevel,
     String filterQuery,
   ) {
-    return logs.where((log) {
-      if (log.level.index < selectedLevel.index) return false;
-      if (filterQuery.trim().isEmpty) return true;
-      final q = filterQuery.toLowerCase();
-      return log.tag.toLowerCase().contains(q) ||
-          log.message.toLowerCase().contains(q);
-    }).toList();
+    return LogcatParserService.filterLogs(
+      logs: logs,
+      selectedLevel: selectedLevel,
+      searchQuery: filterQuery,
+    );
   }
 
   LogcatState copyWith({

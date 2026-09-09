@@ -49,11 +49,7 @@ class _DevKitConsoleScreenState extends State<DevKitConsoleScreen> {
     }
     navCubit.selectTab(index: index);
     if (_pageController.hasClients) {
-      await _pageController.animateToPage(
-        index,
-        duration: const Duration(milliseconds: 250),
-        curve: Curves.easeOutCubic,
-      );
+      _pageController.jumpToPage(index);
     }
   }
 

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:devkit/core/utils/safe_call.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 
 class DeviceInfoData {
@@ -28,8 +29,8 @@ abstract final class DeviceInfoService {
   static final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
   static final NetworkInfo _networkInfo = NetworkInfo();
 
-  static Future<DeviceInfoData> getDeviceInfo() async {
-    try {
+  static Future<Result<DeviceInfoData>> getDeviceInfo() {
+    return safeCall(() async {
       var brand = 'Android';
       var model = 'Device';
       var sdkVersion = 34;
@@ -46,10 +47,7 @@ abstract final class DeviceInfoService {
         sdkVersion = androidInfo.version.sdkInt;
       }
 
-      try {
-        ipAddress = await _networkInfo.getWifiIP();
-      } on Exception catch (_) {}
-
+      ipAddress = await _networkInfo.getWifiIP();
       ipAddress ??= '127.0.0.1';
 
       return DeviceInfoData(
@@ -58,8 +56,6 @@ abstract final class DeviceInfoService {
         sdkVersion: sdkVersion,
         ipAddress: ipAddress,
       );
-    } on Exception catch (_) {
-      return DeviceInfoData.fallback;
-    }
+    });
   }
 }

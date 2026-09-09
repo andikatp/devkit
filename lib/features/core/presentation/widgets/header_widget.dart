@@ -1,6 +1,7 @@
 import 'package:devkit/core/extensions/text_theme.dart';
 import 'package:devkit/core/services/device_info_service.dart';
 import 'package:devkit/core/theme/app_theme.dart';
+import 'package:devkit/core/utils/safe_call.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_cubit.dart';
 import 'package:devkit/features/permissions/presentation/screens/permissions_setup_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class HeaderWidget extends StatefulWidget {
 }
 
 class _HeaderWidgetState extends State<HeaderWidget> {
-  late final Future<DeviceInfoData> _deviceInfoFuture;
+  late final Future<Result<DeviceInfoData>> _deviceInfoFuture;
 
   @override
   void initState() {
@@ -35,16 +36,16 @@ class _HeaderWidgetState extends State<HeaderWidget> {
     final cubit = context.watch<DevKitDashboardCubit>();
     final isAdbGranted = cubit.state.consoleState.isAdbGrantMode;
 
-    return FutureBuilder<DeviceInfoData>(
+    return FutureBuilder<Result<DeviceInfoData>>(
       future: _deviceInfoFuture,
       builder: (context, snapshot) {
-        final data = snapshot.data ?? DeviceInfoData.fallback;
+        final data = snapshot.data?.data ?? DeviceInfoData.fallback;
         return Column(
-          crossAxisAlignment: .start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 8,
           children: [
             Row(
-              mainAxisAlignment: .spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [

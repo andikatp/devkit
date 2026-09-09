@@ -7,10 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LogcatCubit extends Cubit<LogcatState> {
-  new({
-    required this.logcatRepository,
-    LogcatState? initialState,
-  }) : super(initialState ?? LogcatState(logs: [])) {
+  new({required this.logcatRepository, LogcatState? initialState})
+    : super(initialState ?? LogcatState(logs: [])) {
     unawaited(_initLogStream());
   }
 
@@ -21,8 +19,13 @@ class LogcatCubit extends Cubit<LogcatState> {
   static const int _maxLogLimit = 1000;
 
   Future<void> _initLogStream() async {
-    final initialLogs = await logcatRepository.getInitialLogs();
-    emit(state.copyWith(logs: initialLogs));
+    final result = await logcatRepository.getInitialLogs();
+    final data = result.data;
+    if (result.isSuccess && data != null) {
+      emit(state.copyWith(logs: data));
+    } else if (result.isFailure) {
+      emit(state.copyWith(errorMessage: result.failure?.message));
+    }
 
     await _logSubscription?.cancel();
     _logSubscription = logcatRepository.streamLogs().listen(_onNewLogReceived);
@@ -38,7 +41,7 @@ class LogcatCubit extends Cubit<LogcatState> {
   void _scheduleBatchFlush() {
     if (_batchTimer?.isActive ?? false) return;
 
-    _batchTimer = Timer(const Duration(milliseconds: 100), _flushBatchBuffer);
+    _batchTimer = Timer(const Duration(milliseconds: 150), _flushBatchBuffer);
   }
 
   void _flushBatchBuffer() {
@@ -72,8 +75,9 @@ class LogcatCubit extends Cubit<LogcatState> {
     emit(
       state.copyWith(
         isAutoScrollEnabled: nextAutoScroll,
-        successMessage:
-            nextAutoScroll ? 'Auto-scroll ENABLED' : 'Auto-scroll DISABLED',
+        successMessage: nextAutoScroll
+            ? 'Auto-scroll ENABLED'
+            : 'Auto-scroll DISABLED',
       ),
     );
   }
@@ -87,12 +91,7 @@ class LogcatCubit extends Cubit<LogcatState> {
   }
 
   void clearLogs() {
-    emit(
-      state.copyWith(
-        logs: const [],
-        successMessage: 'Logs cleared',
-      ),
-    );
+    emit(state.copyWith(logs: const [], successMessage: 'Logs cleared'));
   }
 
   Future<void> copyLogs() async {
@@ -108,11 +107,7 @@ class LogcatCubit extends Cubit<LogcatState> {
 
   Future<void> copyLogLine(LogcatLogEntity log) async {
     await Clipboard.setData(ClipboardData(text: log.fullText));
-    emit(
-      state.copyWith(
-        successMessage: 'Copied log line to clipboard',
-      ),
-    );
+    emit(state.copyWith(successMessage: 'Copied log line to clipboard'));
   }
 
   @override

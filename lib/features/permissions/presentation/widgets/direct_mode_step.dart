@@ -1,6 +1,7 @@
 import 'package:devkit/core/extensions/text_theme.dart';
 import 'package:devkit/core/theme/app_theme.dart';
 import 'package:devkit/features/permissions/application/permissions_cubit.dart';
+import 'package:devkit/features/permissions/presentation/widgets/auto_blocker_note_card.dart';
 import 'package:devkit/features/permissions/presentation/widgets/command_copy_box.dart';
 import 'package:devkit/features/permissions/presentation/widgets/grant_status_card.dart';
 import 'package:devkit/features/permissions/presentation/widgets/multi_device_helper_card.dart';
@@ -138,6 +139,7 @@ class DirectModeStep extends StatelessWidget {
             ),
           ),
           const MultiDeviceHelperCard(),
+          const AutoBlockerNoteCard(),
           GrantStatusCard(
             isGranted: state.isDirectModeGranted,
             isVerifying: state.isVerifying,

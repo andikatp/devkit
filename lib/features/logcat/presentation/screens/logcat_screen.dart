@@ -14,6 +14,7 @@ class LogcatScreen extends StatelessWidget {
 
   void _onStateListener(BuildContext context, LogcatState state) {
     if (state.successMessage != null) {
+      ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

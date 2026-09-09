@@ -6,16 +6,23 @@ import 'package:devkit/features/tools/application/tools_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AnimationScalerCard extends StatelessWidget {
+class FontScalerCard extends StatelessWidget {
   const new({super.key});
 
   void _onSelectScale(BuildContext context, double scale) {
-    unawaited(context.read<ToolsCubit>().setAnimationScale(scale: scale));
+    unawaited(context.read<ToolsCubit>().setFontScale(scale: scale));
   }
 
   @override
   Widget build(BuildContext context) {
-    final currentScale = context.watch<ToolsCubit>().state.animationScale;
+    final currentScale = context.watch<ToolsCubit>().state.fontScale;
+
+    final scales = [
+      (label: 'Small', value: 0.85),
+      (label: 'Normal', value: 1.0),
+      (label: 'Large', value: 1.15),
+      (label: 'Huge', value: 1.30),
+    ];
 
     return Container(
       padding: const .all(12),
@@ -32,7 +39,7 @@ class AnimationScalerCard extends StatelessWidget {
             spacing: 12,
             children: [
               const Icon(
-                Icons.slow_motion_video,
+                Icons.format_size,
                 color: AppColors.cyanBright,
                 size: 22,
               ),
@@ -42,7 +49,7 @@ class AnimationScalerCard extends StatelessWidget {
                   spacing: 2,
                   children: [
                     Text(
-                      'Animation Scale Override',
+                      'Font Scale Multiplier',
                       style: context.labelMedium.copyWith(
                         color: Colors.white,
                         fontSize: 12,
@@ -50,7 +57,7 @@ class AnimationScalerCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Adjust global window & transition duration scale',
+                      'Test text overflow and accessibility scale in 1 tap',
                       style: context.bodySmall.copyWith(
                         color: AppColors.cyberMuted,
                         fontSize: 10,
@@ -63,11 +70,11 @@ class AnimationScalerCard extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: .spaceAround,
-            children: [0.5, 1.0, 2.0, 5.0].map((scale) {
-              final isSelected = currentScale == scale;
+            children: scales.map((item) {
+              final isSelected = (currentScale - item.value).abs() < 0.05;
               return ChoiceChip(
                 label: Text(
-                  '${scale}x',
+                  item.label,
                   style: context.labelSmall.copyWith(
                     fontSize: 10,
                     fontWeight: .bold,
@@ -87,7 +94,7 @@ class AnimationScalerCard extends StatelessWidget {
                 ),
                 onSelected: (val) {
                   if (val) {
-                    _onSelectScale(context, scale);
+                    _onSelectScale(context, item.value);
                   }
                 },
                 visualDensity: .compact,

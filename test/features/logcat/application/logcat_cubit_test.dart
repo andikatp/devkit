@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:devkit/core/utils/safe_call.dart';
 import 'package:devkit/features/logcat/application/logcat_cubit.dart';
 import 'package:devkit/features/logcat/domain/entities/logcat_log_entity.dart';
 import 'package:devkit/features/logcat/domain/repositories/logcat_repository.dart';
@@ -13,8 +14,8 @@ class FakeLogcatRepository implements LogcatRepository {
   }
 
   @override
-  Future<List<LogcatLogEntity>> getInitialLogs() async {
-    return const [
+  Future<Result<List<LogcatLogEntity>>> getInitialLogs() async {
+    return const Result<List<LogcatLogEntity>>.success([
       LogcatLogEntity(
         timestamp: '09:50:11.412',
         pid: 1892,
@@ -23,7 +24,7 @@ class FakeLogcatRepository implements LogcatRepository {
         tag: 'TestTag',
         message: 'Initial test log',
       ),
-    ];
+    ]);
   }
 
   @override

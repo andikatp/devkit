@@ -34,11 +34,11 @@ class ProSuiteBannerCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                '⚡ ',
+                '❤️ ',
                 style: context.bodyMedium.copyWith(fontSize: 16),
               ),
               Text(
-                'SUPPORT CREATOR & UNLOCK PRO',
+                'SUPPORT DEVKIT CREATOR',
                 style: context.titleSmall.copyWith(
                   color: Colors.white,
                   fontSize: 12,
@@ -49,8 +49,8 @@ class ProSuiteBannerCard extends StatelessWidget {
             ],
           ),
           Text(
-            'Unlock advanced developer tools, Layout Bounds inspector, '
-            'Animation Scaler, and Direct ADB toggle engine permanently.',
+            'DevKit is independently built. Support ongoing open-source '
+            'updates, new developer utilities, and creator coffee funds.',
             style: context.bodySmall.copyWith(
               color: AppColors.cyberMuted,
               fontSize: 11,
@@ -73,11 +73,11 @@ class ProSuiteBannerCard extends StatelessWidget {
                 mainAxisAlignment: .center,
                 children: [
                   Text(
-                    '⚡ ',
+                    '☕ ',
                     style: context.bodyMedium.copyWith(fontSize: 14),
                   ),
                   Text(
-                    'VIEW PRO TIERS & DONATE',
+                    'DONATE TO CREATOR',
                     style: context.labelSmall.copyWith(
                       color: Colors.black,
                       fontWeight: .bold,
