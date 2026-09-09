@@ -24,7 +24,9 @@ class ToolsCubit extends Cubit<ToolsState> {
 
   Future<void> _initTools() async {
     final isAdbGranted = await PermissionService.isWriteSecureSettingsGranted();
+    if (isClosed) return;
     final result = await toolsRepository.getInitialToolsState();
+    if (isClosed) return;
     final data = result.data;
     if (result.isSuccess && data != null) {
       emit(data.copyWith(isAdbGranted: isAdbGranted));
@@ -42,11 +44,13 @@ class ToolsCubit extends Cubit<ToolsState> {
 
   Future<void> refreshAdbStatus() async {
     final isGranted = await PermissionService.isWriteSecureSettingsGranted();
+    if (isClosed) return;
     emit(state.copyWith(isAdbGranted: isGranted));
   }
 
   Future<void> copyAdbCommand() async {
     await Clipboard.setData(const ClipboardData(text: adbCommandString));
+    if (isClosed) return;
     emit(
       state.copyWith(
         successMessage: 'Copied ADB permission command to clipboard',
