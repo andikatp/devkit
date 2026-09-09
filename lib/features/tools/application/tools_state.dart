@@ -11,6 +11,8 @@ class ToolsState {
     this.strictMode = false,
     this.animationScale = 1.0,
     this.isAdbGranted = false,
+    this.isDirectWriteBlocked = false,
+    this.isCardDismissed = false,
     this.successMessage,
     this.errorMessage,
   });
@@ -26,6 +28,8 @@ class ToolsState {
   final bool strictMode;
   final double animationScale;
   final bool isAdbGranted;
+  final bool isDirectWriteBlocked;
+  final bool isCardDismissed;
   final String? successMessage;
   final String? errorMessage;
 
@@ -41,6 +45,8 @@ class ToolsState {
     bool? strictMode,
     double? animationScale,
     bool? isAdbGranted,
+    bool? isDirectWriteBlocked,
+    bool? isCardDismissed,
     String? successMessage,
     String? errorMessage,
   }) {
@@ -56,6 +62,8 @@ class ToolsState {
       strictMode: strictMode ?? this.strictMode,
       animationScale: animationScale ?? this.animationScale,
       isAdbGranted: isAdbGranted ?? this.isAdbGranted,
+      isDirectWriteBlocked: isDirectWriteBlocked ?? this.isDirectWriteBlocked,
+      isCardDismissed: isCardDismissed ?? this.isCardDismissed,
       successMessage: successMessage,
       errorMessage: errorMessage,
     );

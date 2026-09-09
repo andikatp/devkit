@@ -19,12 +19,11 @@ class ToolsCubit extends Cubit<ToolsState> {
       'android.permission.WRITE_SECURE_SETTINGS';
 
   static const String _blockedMsg =
-      'Direct setting write blocked by Android. Opened Developer Settings. '
-      'Grant WRITE_SECURE_SETTINGS via ADB for 1-tap toggles.';
+      'Direct setting write blocked by Android. Open Developer Settings below '
+      'to toggle manually.';
 
   Future<void> _initTools() async {
-    final isAdbGranted =
-        await PermissionService.isWriteSecureSettingsGranted();
+    final isAdbGranted = await PermissionService.isWriteSecureSettingsGranted();
     final result = await toolsRepository.getInitialToolsState();
     final data = result.data;
     if (result.isSuccess && data != null) {
@@ -59,12 +58,17 @@ class ToolsCubit extends Cubit<ToolsState> {
     await PermissionService.openDeveloperSettings();
   }
 
+  void setCardDismissed({required bool value}) {
+    emit(state.copyWith(isCardDismissed: value));
+  }
+
   Future<void> toggleLayoutBounds({required bool value}) async {
     final result = await toolsRepository.setLayoutBounds(enabled: value);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
+          isDirectWriteBlocked: true,
+          isCardDismissed: false,
           errorMessage: result.failure?.message ?? _blockedMsg,
         ),
       );
@@ -81,9 +85,10 @@ class ToolsCubit extends Cubit<ToolsState> {
   Future<void> toggleTaps({required bool value}) async {
     final result = await toolsRepository.setShowTaps(enabled: value);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
+          isDirectWriteBlocked: true,
+          isCardDismissed: false,
           errorMessage: result.failure?.message ?? _blockedMsg,
         ),
       );
@@ -100,9 +105,10 @@ class ToolsCubit extends Cubit<ToolsState> {
   Future<void> togglePointerLocation({required bool value}) async {
     final result = await toolsRepository.setPointerLocation(enabled: value);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
+          isDirectWriteBlocked: true,
+          isCardDismissed: false,
           errorMessage: result.failure?.message ?? _blockedMsg,
         ),
       );
@@ -119,9 +125,10 @@ class ToolsCubit extends Cubit<ToolsState> {
   Future<void> toggleStayAwake({required bool value}) async {
     final result = await toolsRepository.setStayAwake(enabled: value);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
+          isDirectWriteBlocked: true,
+          isCardDismissed: false,
           errorMessage: result.failure?.message ?? _blockedMsg,
         ),
       );
@@ -139,9 +146,10 @@ class ToolsCubit extends Cubit<ToolsState> {
   Future<void> toggleDemoMode({required bool value}) async {
     final result = await toolsRepository.setDemoMode(enabled: value);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
+          isDirectWriteBlocked: true,
+          isCardDismissed: false,
           errorMessage: result.failure?.message ?? _blockedMsg,
         ),
       );
@@ -158,9 +166,10 @@ class ToolsCubit extends Cubit<ToolsState> {
   Future<void> toggleForceDarkMode({required bool value}) async {
     final result = await toolsRepository.setForceDarkMode(enabled: value);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
+          isDirectWriteBlocked: true,
+          isCardDismissed: false,
           errorMessage: result.failure?.message ?? _blockedMsg,
         ),
       );
@@ -178,9 +187,10 @@ class ToolsCubit extends Cubit<ToolsState> {
   Future<void> setFontScale({required double scale}) async {
     final result = await toolsRepository.setFontScale(scale: scale);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
+          isDirectWriteBlocked: true,
+          isCardDismissed: false,
           errorMessage: result.failure?.message ?? _blockedMsg,
         ),
       );
@@ -197,9 +207,10 @@ class ToolsCubit extends Cubit<ToolsState> {
   Future<void> toggleGpuProfiling({required bool value}) async {
     final result = await toolsRepository.setGpuProfiling(enabled: value);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
+          isDirectWriteBlocked: true,
+          isCardDismissed: false,
           errorMessage: result.failure?.message ?? _blockedMsg,
         ),
       );
@@ -216,9 +227,10 @@ class ToolsCubit extends Cubit<ToolsState> {
   Future<void> toggleStrictMode({required bool value}) async {
     final result = await toolsRepository.setStrictMode(enabled: value);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
+          isDirectWriteBlocked: true,
+          isCardDismissed: false,
           errorMessage: result.failure?.message ?? _blockedMsg,
         ),
       );
@@ -235,9 +247,10 @@ class ToolsCubit extends Cubit<ToolsState> {
   Future<void> setAnimationScale({required double scale}) async {
     final result = await toolsRepository.setAnimationScale(scale: scale);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
+          isDirectWriteBlocked: true,
+          isCardDismissed: false,
           errorMessage: result.failure?.message ?? _blockedMsg,
         ),
       );

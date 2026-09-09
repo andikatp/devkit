@@ -37,10 +37,11 @@ class AutoBlockerNoteCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'If your phone shows a "24-hour Security Delay" or'
-                  ' "Apps from unverified developers" restriction, Android may'
-                  ' block 1-tap toggles until the delay expires. You can still'
-                  ' use Developer Options as a fallback.',
+                  'On Samsung / Android 14+, turn off "Auto Blocker" '
+                  '(Settings > Security & Privacy > Auto Blocker) and enable '
+                  '"Allow apps from unverified developers" in Developer '
+                  'Options. Otherwise, Android may enforce a 24-hour delay or '
+                  'block 1-tap toggles.',
                   style: context.bodySmall.copyWith(
                     color: AppColors.cyberMuted,
                     fontSize: 10,

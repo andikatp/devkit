@@ -102,7 +102,6 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
 
   Future<void> toggleDevOptions({required bool value}) async {
     if (!state.consoleState.isAdbGrantMode) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
           errorMessage: 'Direct ADB mode required to toggle Developer Options.',
@@ -112,7 +111,6 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
     }
     final result = await homeRepository.setDevOptions(enabled: value);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
           errorMessage: result.failure?.message ?? _blockedMsg,
@@ -131,7 +129,6 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
 
   Future<void> toggleUsbDebugging({required bool value}) async {
     if (!state.consoleState.isAdbGrantMode) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
           errorMessage: 'Direct ADB mode required to toggle USB Debugging.',
@@ -141,7 +138,6 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
     }
     final result = await homeRepository.setUsbDebugging(enabled: value);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
           errorMessage: result.failure?.message ?? _blockedMsg,
@@ -159,7 +155,6 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
 
   Future<void> toggleWirelessDebugging({required bool value}) async {
     if (!state.consoleState.isAdbGrantMode) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
           errorMessage:
@@ -170,7 +165,6 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
     }
     final result = await homeRepository.setWirelessDebugging(enabled: value);
     if (result.isFailure || result.data != true) {
-      await PermissionService.openDeveloperSettings();
       emit(
         state.copyWith(
           errorMessage: result.failure?.message ?? _blockedMsg,

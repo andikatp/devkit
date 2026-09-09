@@ -97,15 +97,18 @@ class MainActivity : FlutterActivity() {
                 }
                 "setDevOptions" -> {
                     val enabled = call.argument<Boolean>("enabled") ?: false
-                    result.success(setGlobalToggleSetting(Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, enabled))
+                    val targetVal = if (enabled) 1 else 0
+                    result.success(writeGlobalInt(Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, targetVal))
                 }
                 "setUsbDebugging" -> {
                     val enabled = call.argument<Boolean>("enabled") ?: false
-                    result.success(setGlobalToggleSetting(Settings.Global.ADB_ENABLED, enabled))
+                    val targetVal = if (enabled) 1 else 0
+                    result.success(writeGlobalInt(Settings.Global.ADB_ENABLED, targetVal))
                 }
                 "setWirelessDebugging" -> {
                     val enabled = call.argument<Boolean>("enabled") ?: false
-                    result.success(setGlobalToggleSetting("adb_wifi_enabled", enabled))
+                    val targetVal = if (enabled) 1 else 0
+                    result.success(writeGlobalInt("adb_wifi_enabled", targetVal))
                 }
                 "getToolsState" -> {
                     try {
@@ -134,15 +137,24 @@ class MainActivity : FlutterActivity() {
                         result.error("GET_TOOLS_STATE_ERROR", e.message, null)
                     }
                 }
+                "setShowTaps" -> {
+                    val enabled = call.argument<Boolean>("enabled") ?: false
+                    val targetVal = if (enabled) 1 else 0
+                    result.success(writeSystemInt("show_touches", targetVal))
+                }
+                "setPointerLocation" -> {
+                    val enabled = call.argument<Boolean>("enabled") ?: false
+                    val targetVal = if (enabled) 1 else 0
+                    result.success(writeSystemInt("pointer_location", targetVal))
+                }
                 "setStayAwake" -> {
                     val enabled = call.argument<Boolean>("enabled") ?: false
                     val targetVal = if (enabled) 7 else 0
-                    writeSettingInt(Settings.Global.STAY_ON_WHILE_PLUGGED_IN, targetVal)
-                    val actualGlobal = try { Settings.Global.getInt(contentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN, -1) } catch (e: Exception) { -1 }
-                    result.success(actualGlobal == targetVal || (enabled && actualGlobal > 0))
+                    result.success(writeGlobalInt(Settings.Global.STAY_ON_WHILE_PLUGGED_IN, targetVal))
                 }
                 "setDemoMode" -> {
                     val enabled = call.argument<Boolean>("enabled") ?: false
+                    val targetVal = if (enabled) 1 else 0
                     try {
                         val intent = Intent("com.android.systemui.demo")
                         if (enabled) {
@@ -164,189 +176,94 @@ class MainActivity : FlutterActivity() {
                             sendBroadcast(intent)
                         }
                     } catch (e: Exception) {}
-                    result.success(setGlobalToggleSetting("sysui_demo_allowed", enabled))
+                    result.success(writeGlobalInt("sysui_demo_allowed", targetVal))
                 }
                 "setForceDarkMode" -> {
                     val enabled = call.argument<Boolean>("enabled") ?: false
                     val targetVal = if (enabled) 2 else 1
-                    writeSettingInt("ui_night_mode", targetVal)
-                    val actualSecure = try { Settings.Secure.getInt(contentResolver, "ui_night_mode", -1) } catch (e: Exception) { -1 }
-                    result.success(actualSecure == targetVal)
+                    result.success(writeSecureInt("ui_night_mode", targetVal))
                 }
                 "setFontScale" -> {
                     val scale = (call.argument<Double>("scale") ?: 1.0).toFloat()
-                    writeSettingFloat("font_scale", scale)
-                    val actualSys = try { Settings.System.getFloat(contentResolver, "font_scale", 1.0f) } catch (e: Exception) { 1.0f }
-                    result.success(Math.abs(actualSys - scale) < 0.05f)
-                }
-                "setShowTaps" -> {
-                    val enabled = call.argument<Boolean>("enabled") ?: false
-                    result.success(setSystemSettingAndProperty("show_touches", "persist.sys.show_touches", enabled))
-                }
-                "setPointerLocation" -> {
-                    val enabled = call.argument<Boolean>("enabled") ?: false
-                    result.success(setSystemSettingAndProperty("pointer_location", "persist.sys.pointer_location", enabled))
+                    result.success(writeSystemFloat("font_scale", scale))
                 }
                 "setAnimationScale" -> {
                     val scale = (call.argument<Double>("scale") ?: 1.0).toFloat()
-                    val scaleStr = scale.toString()
-                    writeSettingFloat(Settings.Global.WINDOW_ANIMATION_SCALE, scale)
-                    writeSettingFloat(Settings.Global.TRANSITION_ANIMATION_SCALE, scale)
-                    writeSettingFloat(Settings.Global.ANIMATOR_DURATION_SCALE, scale)
-                    writeSystemProperty("persist.sys.window_anim_scale", scaleStr)
-                    writeSystemProperty("persist.sys.transition_anim_scale", scaleStr)
-                    writeSystemProperty("persist.sys.animator_duration_scale", scaleStr)
-                    val actualGlobal = try { Settings.Global.getFloat(contentResolver, Settings.Global.WINDOW_ANIMATION_SCALE, -1f) } catch (e: Exception) { -1f }
-                    val actualProp = getSystemProperty("persist.sys.window_anim_scale", "")
-                    val isVerified = (actualProp == scaleStr) || (Math.abs(actualGlobal - scale) < 0.01f)
-                    result.success(isVerified)
+                    val s1 = writeGlobalFloat(Settings.Global.WINDOW_ANIMATION_SCALE, scale)
+                    val s2 = writeGlobalFloat(Settings.Global.TRANSITION_ANIMATION_SCALE, scale)
+                    val s3 = writeGlobalFloat(Settings.Global.ANIMATOR_DURATION_SCALE, scale)
+                    result.success(s1 && s2 && s3)
                 }
                 "setGpuProfiling" -> {
                     val enabled = call.argument<Boolean>("enabled") ?: false
                     val targetVal = if (enabled) "visual_bars" else "false"
-                    writeSettingString("track_frame_time", targetVal)
-                    writeSystemProperty("debug.hwui.profile", targetVal)
-                    val isVerified = getSystemProperty("debug.hwui.profile", "") == targetVal
-                    result.success(isVerified)
+                    result.success(writeGlobalString("track_frame_time", targetVal))
                 }
                 "setStrictMode" -> {
                     val enabled = call.argument<Boolean>("enabled") ?: false
                     val targetVal = if (enabled) 1 else 0
-                    val targetStr = targetVal.toString()
-                    writeSettingInt("strict_mode_visual", targetVal)
-                    writeSystemProperty("persist.sys.strictmode.visual", targetStr)
-                    val isVerified = getSystemProperty("persist.sys.strictmode.visual", "") == targetStr
-                    result.success(isVerified)
+                    result.success(writeSystemInt("strict_mode_visual", targetVal))
                 }
                 else -> result.notImplemented()
             }
         }
     }
 
-    private fun setGlobalToggleSetting(settingKey: String, enabled: Boolean): Boolean {
-        val targetVal = if (enabled) 1 else 0
-        writeSettingInt(settingKey, targetVal)
-        val actualGlobal = try { Settings.Global.getInt(contentResolver, settingKey, -1) } catch (e: Exception) { -1 }
-        return actualGlobal == targetVal
-    }
-
-    private fun setSystemSettingAndProperty(settingKey: String, propKey: String, enabled: Boolean): Boolean {
-        val targetVal = if (enabled) 1 else 0
-        val targetStr = targetVal.toString()
-        writeSettingInt(settingKey, targetVal)
-        writeSystemProperty(propKey, targetStr)
-        val actualSysInt = try { Settings.System.getInt(contentResolver, settingKey, -1) } catch (e: Exception) { -1 }
-        val actualProp = getSystemProperty(propKey, "")
-        return (actualSysInt == targetVal) || (actualProp == targetStr)
-    }
-
-    private fun getSystemProperty(key: String, defaultValue: String = ""): String {
+    private fun writeGlobalInt(key: String, value: Int): Boolean {
         return try {
-            val c = Class.forName("android.os.SystemProperties")
-            val get = c.getMethod("get", String::class.java, String::class.java)
-            (get.invoke(null, key, defaultValue) as? String) ?: defaultValue
-        } catch (e: Exception) {
-            defaultValue
-        }
-    }
-
-    private fun <T> writeSettingGeneric(
-        key: String,
-        value: T,
-        putGlobal: (String, T) -> Unit,
-        putSystem: (String, T) -> Unit,
-        putSecure: (String, T) -> Unit,
-        verifier: () -> Boolean
-    ): Boolean {
-        val putters = listOf(putGlobal, putSystem, putSecure)
-        for (put in putters) {
-            try {
-                put(key, value)
-                if (verifier()) return true
-            } catch (e: Exception) {}
-        }
-        val valueStr = value.toString()
-        runShellCommand("settings put global $key $valueStr")
-        runShellCommand("settings put system $key $valueStr")
-        runShellCommand("settings put secure $key $valueStr")
-        return verifier()
-    }
-
-    private fun writeSettingInt(key: String, value: Int): Boolean = writeSettingGeneric(
-        key, value,
-        { k, v -> Settings.Global.putInt(contentResolver, k, v) },
-        { k, v -> Settings.System.putInt(contentResolver, k, v) },
-        { k, v -> Settings.Secure.putInt(contentResolver, k, v) },
-        { verifySettingInt(key, value) }
-    )
-
-    private fun verifySettingInt(key: String, value: Int): Boolean {
-        val g = try { Settings.Global.getInt(contentResolver, key, -1) } catch (e: Exception) { -1 }
-        val s = try { Settings.System.getInt(contentResolver, key, -1) } catch (e: Exception) { -1 }
-        val sec = try { Settings.Secure.getInt(contentResolver, key, -1) } catch (e: Exception) { -1 }
-        return g == value || s == value || sec == value
-    }
-
-    private fun writeSettingString(key: String, value: String): Boolean = writeSettingGeneric(
-        key, value,
-        { k, v -> Settings.Global.putString(contentResolver, k, v) },
-        { k, v -> Settings.System.putString(contentResolver, k, v) },
-        { k, v -> Settings.Secure.putString(contentResolver, k, v) },
-        { verifySettingString(key, value) }
-    )
-
-    private fun verifySettingString(key: String, value: String): Boolean {
-        val g = try { Settings.Global.getString(contentResolver, key) } catch (e: Exception) { null }
-        val s = try { Settings.System.getString(contentResolver, key) } catch (e: Exception) { null }
-        val sec = try { Settings.Secure.getString(contentResolver, key) } catch (e: Exception) { null }
-        return g == value || s == value || sec == value
-    }
-
-    private fun writeSettingFloat(key: String, value: Float): Boolean = writeSettingGeneric(
-        key, value,
-        { k, v -> Settings.Global.putFloat(contentResolver, k, v) },
-        { k, v -> Settings.System.putFloat(contentResolver, k, v) },
-        { k, v -> Settings.Secure.putFloat(contentResolver, k, v) },
-        { verifySettingFloat(key, value) }
-    )
-
-    private fun verifySettingFloat(key: String, value: Float): Boolean {
-        val g = try { Settings.Global.getFloat(contentResolver, key, -1f) } catch (e: Exception) { -1f }
-        val s = try { Settings.System.getFloat(contentResolver, key, -1f) } catch (e: Exception) { -1f }
-        val sec = try { Settings.Secure.getFloat(contentResolver, key, -1f) } catch (e: Exception) { -1f }
-        return Math.abs(g - value) < 0.01f || Math.abs(s - value) < 0.01f || Math.abs(sec - value) < 0.01f
-    }
-
-    private fun writeSystemProperty(key: String, value: String): Boolean {
-        var success = false
-        try {
-            val c = Class.forName("android.os.SystemProperties")
-            val set = c.getMethod("set", String::class.java, String::class.java)
-            set.invoke(null, key, value)
-            success = true
-        } catch (e: Exception) {}
-        if (!success) {
-            success = runShellCommand("setprop $key $value")
-        }
-        return success
-    }
-
-    private fun runShellCommand(cmd: String): Boolean {
-        val success = try {
-            val process = Runtime.getRuntime().exec(cmd)
-            val exitCode = process.waitFor()
-            exitCode == 0
+            val success = Settings.Global.putInt(contentResolver, key, value)
+            val readback = Settings.Global.getInt(contentResolver, key, -1)
+            success && readback == value
         } catch (e: Exception) {
             false
         }
-        return if (success) true else runSuCommand(cmd)
     }
 
-    private fun runSuCommand(cmd: String): Boolean {
+    private fun writeSystemInt(key: String, value: Int): Boolean {
         return try {
-            val process = Runtime.getRuntime().exec(arrayOf("su", "-c", cmd))
-            val exitCode = process.waitFor()
-            exitCode == 0
+            val success = Settings.System.putInt(contentResolver, key, value)
+            val readback = Settings.System.getInt(contentResolver, key, -1)
+            success && readback == value
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    private fun writeSecureInt(key: String, value: Int): Boolean {
+        return try {
+            val success = Settings.Secure.putInt(contentResolver, key, value)
+            val readback = Settings.Secure.getInt(contentResolver, key, -1)
+            success && readback == value
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    private fun writeGlobalString(key: String, value: String): Boolean {
+        return try {
+            val success = Settings.Global.putString(contentResolver, key, value)
+            val readback = Settings.Global.getString(contentResolver, key)
+            success && readback == value
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    private fun writeSystemFloat(key: String, value: Float): Boolean {
+        return try {
+            val success = Settings.System.putFloat(contentResolver, key, value)
+            val readback = Settings.System.getFloat(contentResolver, key, -1f)
+            success && Math.abs(readback - value) < 0.05f
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    private fun writeGlobalFloat(key: String, value: Float): Boolean {
+        return try {
+            val success = Settings.Global.putFloat(contentResolver, key, value)
+            val readback = Settings.Global.getFloat(contentResolver, key, -1f)
+            success && Math.abs(readback - value) < 0.05f
         } catch (e: Exception) {
             false
         }

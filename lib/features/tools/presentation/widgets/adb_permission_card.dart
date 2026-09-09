@@ -18,59 +18,27 @@ class AdbPermissionCard extends StatelessWidget {
     unawaited(context.read<ToolsCubit>().openDeveloperSettings());
   }
 
+  void _onDismiss(BuildContext context) {
+    context.read<ToolsCubit>().setCardDismissed(value: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     final isAdbGranted = context.select<ToolsCubit, bool>(
       (c) => c.state.isAdbGranted,
     );
+    final isDirectWriteBlocked = context.select<ToolsCubit, bool>(
+      (c) => c.state.isDirectWriteBlocked,
+    );
+    final isCardDismissed = context.select<ToolsCubit, bool>(
+      (c) => c.state.isCardDismissed,
+    );
 
-    if (isAdbGranted) {
-      return Container(
-        padding: const .all(12),
-        decoration: BoxDecoration(
-          color: AppColors.cyberEmerald.withValues(alpha: 0.1),
-          borderRadius: .circular(8),
-          border: .all(
-            color: AppColors.cyberEmerald.withValues(alpha: 0.4),
-          ),
-        ),
-        child: Row(
-          spacing: 10,
-          children: [
-            const Icon(
-              Icons.check_circle,
-              color: AppColors.cyberEmerald,
-              size: 20,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: .start,
-                spacing: 2,
-                children: [
-                  Text(
-                    'DIRECT ADB MODE ACTIVE',
-                    style: context.titleSmall.copyWith(
-                      color: AppColors.cyberEmerald,
-                      fontSize: 11,
-                      fontWeight: .bold,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  Text(
-                    '1-Tap System Toggles Enabled. Setting changes apply '
-                    'instantly.',
-                    style: context.bodySmall.copyWith(
-                      color: AppColors.cyberMuted,
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
+    if (isCardDismissed || (isAdbGranted && !isDirectWriteBlocked)) {
+      return const SizedBox.shrink();
     }
+
+    final isBlockedMode = isAdbGranted && isDirectWriteBlocked;
 
     return Container(
       padding: const .all(12),
@@ -93,7 +61,9 @@ class AdbPermissionCard extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  'DIRECT ADB MODE RECOMMENDED',
+                  isBlockedMode
+                      ? 'DIRECT WRITE BLOCKED BY OS'
+                      : 'DIRECT ADB MODE RECOMMENDED',
                   style: context.titleSmall.copyWith(
                     color: AppColors.cyberAmber,
                     fontSize: 11,
@@ -102,60 +72,78 @@ class AdbPermissionCard extends StatelessWidget {
                   ),
                 ),
               ),
+              InkWell(
+                onTap: () => _onDismiss(context),
+                borderRadius: .circular(12),
+                child: const Padding(
+                  padding: .all(2),
+                  child: Icon(
+                    Icons.close,
+                    color: AppColors.cyberMuted,
+                    size: 16,
+                  ),
+                ),
+              ),
             ],
           ),
           Text(
-            'To enable 1-tap direct toggles without opening system settings, '
-            'grant WRITE_SECURE_SETTINGS via ADB:',
+            isBlockedMode
+                ? 'Your device OS or Auto Blocker is restricting direct 1-tap '
+                    'setting writes even with ADB granted. Open Developer '
+                    'Settings to toggle manually:'
+                : 'To enable 1-tap direct toggles without opening system '
+                    'settings, grant WRITE_SECURE_SETTINGS via ADB:',
             style: context.bodySmall.copyWith(
               color: AppColors.cyberMuted,
               fontSize: 11,
               height: 1.3,
             ),
           ),
-          Container(
-            padding: const .symmetric(horizontal: 8, vertical: 6),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.black.withValues(alpha: 0.5),
-              borderRadius: .circular(4),
-              border: .all(color: AppColors.cyberBorder),
-            ),
-            child: Text(
-              ToolsCubit.adbCommandString,
-              style: context.bodySmall.copyWith(
-                color: AppColors.cyanBright,
-                fontSize: 10,
-                fontFamily: 'monospace',
+          if (!isBlockedMode)
+            Container(
+              padding: const .symmetric(horizontal: 8, vertical: 6),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.5),
+                borderRadius: .circular(4),
+                border: .all(color: AppColors.cyberBorder),
+              ),
+              child: Text(
+                ToolsCubit.adbCommandString,
+                style: context.bodySmall.copyWith(
+                  color: AppColors.cyanBright,
+                  fontSize: 10,
+                  fontFamily: 'monospace',
+                ),
               ),
             ),
-          ),
           const AutoBlockerNoteCard(),
           Row(
             spacing: 8,
             children: [
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: () => _onCopyCommand(context),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.cyberAmber,
-                    side: const BorderSide(color: AppColors.cyberAmber),
-                    padding: const .symmetric(vertical: 8),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: .circular(6),
+              if (!isBlockedMode)
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () => _onCopyCommand(context),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.cyberAmber,
+                      side: const BorderSide(color: AppColors.cyberAmber),
+                      padding: const .symmetric(vertical: 8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: .circular(6),
+                      ),
                     ),
-                  ),
-                  icon: const Icon(Icons.copy, size: 14),
-                  label: Text(
-                    'COPY COMMAND',
-                    style: context.labelSmall.copyWith(
-                      color: AppColors.cyberAmber,
-                      fontSize: 10,
-                      fontWeight: .bold,
+                    icon: const Icon(Icons.copy, size: 14),
+                    label: Text(
+                      'COPY COMMAND',
+                      style: context.labelSmall.copyWith(
+                        color: AppColors.cyberAmber,
+                        fontSize: 10,
+                        fontWeight: .bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: () => _onOpenDevSettings(context),
