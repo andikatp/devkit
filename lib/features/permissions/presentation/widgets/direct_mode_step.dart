@@ -139,7 +139,7 @@ class DirectModeStep extends StatelessWidget {
             ),
           ),
           const MultiDeviceHelperCard(),
-          const AutoBlockerNoteCard(),
+          if (!state.isDirectModeGranted) const AutoBlockerNoteCard(),
           GrantStatusCard(
             isGranted: state.isDirectModeGranted,
             isVerifying: state.isVerifying,

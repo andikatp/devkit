@@ -25,57 +25,50 @@ class AdbPermissionCard extends StatelessWidget {
     );
 
     if (isAdbGranted) {
-      return Column(
-        crossAxisAlignment: .start,
-        spacing: 10,
-        children: [
-          Container(
-            padding: const .all(12),
-            decoration: BoxDecoration(
-              color: AppColors.cyberEmerald.withValues(alpha: 0.1),
-              borderRadius: .circular(8),
-              border: .all(
-                color: AppColors.cyberEmerald.withValues(alpha: 0.4),
+      return Container(
+        padding: const .all(12),
+        decoration: BoxDecoration(
+          color: AppColors.cyberEmerald.withValues(alpha: 0.1),
+          borderRadius: .circular(8),
+          border: .all(
+            color: AppColors.cyberEmerald.withValues(alpha: 0.4),
+          ),
+        ),
+        child: Row(
+          spacing: 10,
+          children: [
+            const Icon(
+              Icons.check_circle,
+              color: AppColors.cyberEmerald,
+              size: 20,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: .start,
+                spacing: 2,
+                children: [
+                  Text(
+                    'DIRECT ADB MODE ACTIVE',
+                    style: context.titleSmall.copyWith(
+                      color: AppColors.cyberEmerald,
+                      fontSize: 11,
+                      fontWeight: .bold,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  Text(
+                    '1-Tap System Toggles Enabled. Setting changes apply '
+                    'instantly.',
+                    style: context.bodySmall.copyWith(
+                      color: AppColors.cyberMuted,
+                      fontSize: 10,
+                    ),
+                  ),
+                ],
               ),
             ),
-            child: Row(
-              spacing: 10,
-              children: [
-                const Icon(
-                  Icons.check_circle,
-                  color: AppColors.cyberEmerald,
-                  size: 20,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: .start,
-                    spacing: 2,
-                    children: [
-                      Text(
-                        'DIRECT ADB MODE ACTIVE',
-                        style: context.titleSmall.copyWith(
-                          color: AppColors.cyberEmerald,
-                          fontSize: 11,
-                          fontWeight: .bold,
-                          letterSpacing: 0.5,
-                        ),
-                      ),
-                      Text(
-                        '1-Tap System Toggles Enabled. Setting changes apply '
-                        'instantly.',
-                        style: context.bodySmall.copyWith(
-                          color: AppColors.cyberMuted,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const AutoBlockerNoteCard(),
-        ],
+          ],
+        ),
       );
     }
 

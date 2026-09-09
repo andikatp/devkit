@@ -1,7 +1,6 @@
 import 'package:devkit/core/extensions/text_theme.dart';
 import 'package:devkit/core/theme/app_theme.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_cubit.dart';
-import 'package:devkit/features/home/domain/entities/console_state_entity.dart';
 import 'package:devkit/features/home/presentation/widgets/state_toggles_card/toggle_row_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,25 +42,26 @@ class StateTogglesCard extends StatelessWidget {
                 ),
               ],
             ),
-            Container(
-              padding: const .symmetric(horizontal: 8, vertical: 2),
-              decoration: BoxDecoration(
-                color: AppColors.cyberCardDeep,
-                borderRadius: .circular(4),
-                border: .all(color: AppColors.cyberBorder),
-              ),
-              child: Text(
-                state.modeText,
-                style: context.labelSmall.copyWith(
-                  color: state.isAdbGrantMode
-                      ? AppColors.cyanBright
-                      : AppColors.cyberMuted,
-                  fontSize: 10,
-                  fontWeight: .bold,
-                  letterSpacing: 0.5,
+            if (!state.isAdbGrantMode)
+              Container(
+                padding: const .symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: AppColors.cyberAmber.withValues(alpha: 0.15),
+                  borderRadius: .circular(4),
+                  border: .all(
+                    color: AppColors.cyberAmber.withValues(alpha: 0.4),
+                  ),
+                ),
+                child: Text(
+                  'SHORTCUT MODE',
+                  style: context.labelSmall.copyWith(
+                    color: AppColors.cyberAmber,
+                    fontSize: 10,
+                    fontWeight: .bold,
+                    letterSpacing: 0.5,
+                  ),
                 ),
               ),
-            ),
           ],
         ),
         GlowContainer(
@@ -100,27 +100,29 @@ class StateTogglesCard extends StatelessWidget {
                 value: state.isWirelessDebuggingOn,
                 onChanged: (val) => cubit.toggleWirelessDebugging(value: val),
               ),
-              const Divider(color: AppColors.cyberBorder, height: 24),
-              Row(
-                children: [
-                  Text(
-                    '⚡ ',
-                    style: context.bodySmall.copyWith(
-                      color: AppColors.cyanBright,
-                      fontSize: 12,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      state.footnoteText,
+              if (!state.isAdbGrantMode) ...[
+                const Divider(color: AppColors.cyberBorder, height: 24),
+                Row(
+                  children: [
+                    Text(
+                      '⚡ ',
                       style: context.bodySmall.copyWith(
-                        color: AppColors.cyberMuted,
-                        fontSize: 11,
+                        color: AppColors.cyberAmber,
+                        fontSize: 12,
                       ),
                     ),
-                  ),
-                ],
-              ),
+                    Expanded(
+                      child: Text(
+                        'Opens system page via INTENT SHORTCUT',
+                        style: context.bodySmall.copyWith(
+                          color: AppColors.cyberMuted,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ],
           ),
         ),
