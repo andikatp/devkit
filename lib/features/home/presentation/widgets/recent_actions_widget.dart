@@ -18,13 +18,6 @@ class RecentActionsWidget extends StatelessWidget {
     final cubit = context.read<DevKitDashboardCubit>();
     final currentVal = cubit.state.consoleState.isDevOptionsOn;
     unawaited(cubit.toggleDevOptions(value: !currentVal));
-
-    _showSnackBar(
-      context,
-      message: !currentVal
-          ? 'Developer Options ENABLED'
-          : 'Developer Options DISABLED',
-    );
   }
 
   void _onCopyAdbCommand(BuildContext context) {
@@ -55,7 +48,7 @@ class RecentActionsWidget extends StatelessWidget {
           ),
         ),
         backgroundColor: AppColors.cyberDark,
-        behavior: .floating,
+        behavior: .fixed,
         duration: const Duration(seconds: 2),
       ),
     );
