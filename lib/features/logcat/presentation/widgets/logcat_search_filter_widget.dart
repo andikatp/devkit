@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:devkit/core/extensions/text_theme.dart';
 import 'package:devkit/core/theme/app_theme.dart';
 import 'package:devkit/features/logcat/application/logcat_cubit.dart';
@@ -14,6 +16,7 @@ class LogcatSearchFilterWidget extends StatefulWidget {
 
 class _LogcatSearchFilterWidgetState extends State<LogcatSearchFilterWidget> {
   late final TextEditingController _filterController;
+  Timer? _debounceTimer;
 
   @override
   void initState() {
@@ -23,12 +26,18 @@ class _LogcatSearchFilterWidgetState extends State<LogcatSearchFilterWidget> {
 
   @override
   void dispose() {
+    _debounceTimer?.cancel();
     _filterController.dispose();
     super.dispose();
   }
 
   void _onSearchChanged(BuildContext context, String val) {
-    context.read<LogcatCubit>().updateFilter(query: val);
+    _debounceTimer?.cancel();
+    _debounceTimer = Timer(const Duration(milliseconds: 150), () {
+      if (mounted) {
+        context.read<LogcatCubit>().updateFilter(query: val);
+      }
+    });
   }
 
   @override

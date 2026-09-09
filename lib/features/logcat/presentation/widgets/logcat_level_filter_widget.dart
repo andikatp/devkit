@@ -29,7 +29,8 @@ class LogcatLevelFilterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedLevel = context.watch<LogcatCubit>().state.selectedLevel;
+    final selectedLevel =
+        context.select<LogcatCubit, LogLevel>((c) => c.state.selectedLevel);
 
     return SingleChildScrollView(
       scrollDirection: .horizontal,

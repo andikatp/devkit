@@ -1,4 +1,3 @@
-import 'package:devkit/core/di/injection_container.dart';
 import 'package:devkit/core/extensions/text_theme.dart';
 import 'package:devkit/core/theme/app_theme.dart';
 import 'package:devkit/features/core/presentation/widgets/header_widget.dart';
@@ -17,73 +16,66 @@ class ToolsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<ToolsCubit>(),
-      child: Builder(
-        builder: (context) {
-          final cubit = context.read<ToolsCubit>();
-          final toolsState = context.watch<ToolsCubit>().state;
+    final cubit = context.read<ToolsCubit>();
+    final toolsState = context.watch<ToolsCubit>().state;
 
-          return SingleChildScrollView(
-            padding: const .symmetric(horizontal: 16, vertical: 8),
-            child: Column(
-              crossAxisAlignment: .start,
-              spacing: 16,
-              children: [
-                const HeaderWidget(),
-                const ToolsHeaderBarWidget(),
-                ProSuiteBannerCard(onOpenPaywallModal: onOpenPaywallModal),
-                Text(
-                  'QUICK TOGGLE UTILITIES',
-                  style: context.labelSmall.copyWith(
-                    color: AppColors.cyberMuted,
-                    fontSize: 11,
-                    fontWeight: .bold,
-                    letterSpacing: 1,
-                  ),
-                ),
-                ToolSwitchCard(
-                  title: 'Show Layout Bounds',
-                  subtitle: 'Draw clip bounds, margins, and layout grids',
-                  icon: Icons.border_clear,
-                  value: toolsState.showLayoutBounds,
-                  onChanged: (val) => cubit.toggleLayoutBounds(value: val),
-                ),
-                ToolSwitchCard(
-                  title: 'Show Taps & Touches',
-                  subtitle: 'Display visual feedback for touch events',
-                  icon: Icons.touch_app,
-                  value: toolsState.showTaps,
-                  onChanged: (val) => cubit.toggleTaps(value: val),
-                ),
-                ToolSwitchCard(
-                  title: 'Pointer Location',
-                  subtitle: 'Screen overlay showing touch coordinates',
-                  icon: Icons.ads_click,
-                  value: toolsState.showPointerLocation,
-                  onChanged: (val) => cubit.togglePointerLocation(value: val),
-                ),
-                const AnimationScalerCard(),
-                ToolSwitchCard(
-                  title: 'GPU Rendering Profile',
-                  subtitle:
-                      'Bars on screen showing GPU rendering performance',
-                  icon: Icons.speed,
-                  value: toolsState.gpuProfiling,
-                  onChanged: (val) => cubit.toggleGpuProfiling(value: val),
-                ),
-                ToolSwitchCard(
-                  title: 'Strict Mode Flashes',
-                  subtitle:
-                      'Flash screen when apps do long main thread operations',
-                  icon: Icons.flash_on,
-                  value: toolsState.strictMode,
-                  onChanged: (val) => cubit.toggleStrictMode(value: val),
-                ),
-              ],
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 16,
+        children: [
+          const HeaderWidget(),
+          const ToolsHeaderBarWidget(),
+          ProSuiteBannerCard(onOpenPaywallModal: onOpenPaywallModal),
+          Text(
+            'QUICK TOGGLE UTILITIES',
+            style: context.labelSmall.copyWith(
+              color: AppColors.cyberMuted,
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1,
             ),
-          );
-        },
+          ),
+          ToolSwitchCard(
+            title: 'Show Layout Bounds',
+            subtitle: 'Draw clip bounds, margins, and layout grids',
+            icon: Icons.border_clear,
+            value: toolsState.showLayoutBounds,
+            onChanged: (val) => cubit.toggleLayoutBounds(value: val),
+          ),
+          ToolSwitchCard(
+            title: 'Show Taps & Touches',
+            subtitle: 'Display visual feedback for touch events',
+            icon: Icons.touch_app,
+            value: toolsState.showTaps,
+            onChanged: (val) => cubit.toggleTaps(value: val),
+          ),
+          ToolSwitchCard(
+            title: 'Pointer Location',
+            subtitle: 'Screen overlay showing touch coordinates',
+            icon: Icons.ads_click,
+            value: toolsState.showPointerLocation,
+            onChanged: (val) => cubit.togglePointerLocation(value: val),
+          ),
+          const AnimationScalerCard(),
+          ToolSwitchCard(
+            title: 'GPU Rendering Profile',
+            subtitle:
+                'Bars on screen showing GPU rendering performance',
+            icon: Icons.speed,
+            value: toolsState.gpuProfiling,
+            onChanged: (val) => cubit.toggleGpuProfiling(value: val),
+          ),
+          ToolSwitchCard(
+            title: 'Strict Mode Flashes',
+            subtitle:
+                'Flash screen when apps do long main thread operations',
+            icon: Icons.flash_on,
+            value: toolsState.strictMode,
+            onChanged: (val) => cubit.toggleStrictMode(value: val),
+          ),
+        ],
       ),
     );
   }

@@ -1,17 +1,32 @@
 import 'package:devkit/features/logcat/domain/entities/logcat_log_entity.dart';
 
 class LogcatState {
-  const new({
+  new({
     required this.logs,
-    this.selectedLevel = LogLevel.info,
+    List<LogcatLogEntity>? filteredLogs,
+    this.selectedLevel = LogLevel.verbose,
     this.filterQuery = '',
-  });
+    this.isPaused = false,
+    this.isAutoScrollEnabled = true,
+    this.successMessage,
+    this.errorMessage,
+  }) : filteredLogs = filteredLogs ??
+            _computeFilteredLogs(logs, selectedLevel, filterQuery);
 
   final List<LogcatLogEntity> logs;
+  final List<LogcatLogEntity> filteredLogs;
   final LogLevel selectedLevel;
   final String filterQuery;
+  final bool isPaused;
+  final bool isAutoScrollEnabled;
+  final String? successMessage;
+  final String? errorMessage;
 
-  List<LogcatLogEntity> get filteredLogs {
+  static List<LogcatLogEntity> _computeFilteredLogs(
+    List<LogcatLogEntity> logs,
+    LogLevel selectedLevel,
+    String filterQuery,
+  ) {
     return logs.where((log) {
       if (log.level.index < selectedLevel.index) return false;
       if (filterQuery.trim().isEmpty) return true;
@@ -25,11 +40,29 @@ class LogcatState {
     List<LogcatLogEntity>? logs,
     LogLevel? selectedLevel,
     String? filterQuery,
+    bool? isPaused,
+    bool? isAutoScrollEnabled,
+    String? successMessage,
+    String? errorMessage,
   }) {
+    final nextLogs = logs ?? this.logs;
+    final nextLevel = selectedLevel ?? this.selectedLevel;
+    final nextQuery = filterQuery ?? this.filterQuery;
+    final isFilterChanged = logs != null ||
+        selectedLevel != null ||
+        filterQuery != null;
+
     return LogcatState(
-      logs: logs ?? this.logs,
-      selectedLevel: selectedLevel ?? this.selectedLevel,
-      filterQuery: filterQuery ?? this.filterQuery,
+      logs: nextLogs,
+      filteredLogs: isFilterChanged
+          ? _computeFilteredLogs(nextLogs, nextLevel, nextQuery)
+          : filteredLogs,
+      selectedLevel: nextLevel,
+      filterQuery: nextQuery,
+      isPaused: isPaused ?? this.isPaused,
+      isAutoScrollEnabled: isAutoScrollEnabled ?? this.isAutoScrollEnabled,
+      successMessage: successMessage,
+      errorMessage: errorMessage,
     );
   }
 }

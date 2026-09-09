@@ -206,9 +206,9 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
   }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     _pingTimer?.cancel();
     _settingsTimer?.cancel();
-    return super.close();
+    await super.close();
   }
 }

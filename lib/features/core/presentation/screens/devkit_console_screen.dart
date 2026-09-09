@@ -15,8 +15,27 @@ import 'package:devkit/features/tools/presentation/widgets/pro_paywall_sheet.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DevKitConsoleScreen extends StatelessWidget {
+class DevKitConsoleScreen extends StatefulWidget {
   const new({super.key});
+
+  @override
+  State<DevKitConsoleScreen> createState() => _DevKitConsoleScreenState();
+}
+
+class _DevKitConsoleScreenState extends State<DevKitConsoleScreen> {
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   Future<void> _handleTabSelect(BuildContext context, int index) async {
     final navCubit = context.read<ConsoleNavigationCubit>();
@@ -24,10 +43,18 @@ class DevKitConsoleScreen extends StatelessWidget {
       final unlocked = await ProPaywallSheet.show<bool>(context);
       if (unlocked == true && context.mounted) {
         navCubit.unlockPro();
+      } else {
+        return;
       }
-      return;
     }
     navCubit.selectTab(index: index);
+    if (_pageController.hasClients) {
+      await _pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeOutCubic,
+      );
+    }
   }
 
   void _onOpenPaywallSheet(BuildContext context) {
@@ -51,8 +78,9 @@ class DevKitConsoleScreen extends StatelessWidget {
             backgroundColor: AppColors.cyberBlack,
             body: CyberGridBackground(
               child: SafeArea(
-                child: IndexedStack(
-                  index: navState.currentNavIndex,
+                child: PageView(
+                  controller: _pageController,
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
                     const DevKitDashboardView(),
                     const LogcatScreen(),
