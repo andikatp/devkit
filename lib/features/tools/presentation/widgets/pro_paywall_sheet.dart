@@ -49,6 +49,7 @@ class _ProPaywallSheetState extends State<ProPaywallSheet> {
   }
 
   void _onConfirmDonate(String amountText) {
+    ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(

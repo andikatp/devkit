@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:devkit/core/services/device_info_service.dart';
 import 'package:devkit/core/services/permission_service.dart';
 import 'package:devkit/core/services/ping_service.dart';
+import 'package:devkit/core/services/system_settings_service.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_state.dart';
 import 'package:devkit/features/home/domain/repositories/home_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,8 +21,19 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
   Timer? _settingsTimer;
 
   Future<void> _initDashboard() async {
-    final info = await homeRepository.getDeviceInfo();
-    final systemSettings = await homeRepository.getSystemSettings();
+    final infoResult = await homeRepository.getDeviceInfo();
+    final info = infoResult.data ??
+        const DeviceInfoData(
+          brand: 'Unknown',
+          model: 'Device',
+          sdkVersion: 0,
+          ipAddress: '0.0.0.0',
+        );
+
+    final settingsResult = await homeRepository.getSystemSettings();
+    final systemSettings =
+        settingsResult.data ?? SystemSettingsData.fallback;
+
     final isAdbGranted =
         await PermissionService.isWriteSecureSettingsGranted();
 
@@ -48,23 +61,29 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
 
   Future<void> _refreshSystemSettings() async {
     if (isClosed) return;
-    final systemSettings = await homeRepository.getSystemSettings();
-    emit(
-      state.copyWith(
-        consoleState: state.consoleState.copyWith(
-          isDevOptionsOn: systemSettings.isDevOptionsOn,
-          isUsbDebuggingOn: systemSettings.isUsbDebuggingOn,
-          isWirelessDebuggingOn: systemSettings.isWirelessDebuggingOn,
-          devicePort: systemSettings.adbPort,
+    final settingsResult = await homeRepository.getSystemSettings();
+    if (settingsResult.isSuccess && settingsResult.data != null) {
+      final systemSettings = settingsResult.data!;
+      emit(
+        state.copyWith(
+          consoleState: state.consoleState.copyWith(
+            isDevOptionsOn: systemSettings.isDevOptionsOn,
+            isUsbDebuggingOn: systemSettings.isUsbDebuggingOn,
+            isWirelessDebuggingOn: systemSettings.isWirelessDebuggingOn,
+            devicePort: systemSettings.adbPort,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   Future<void> checkPermissions() async {
     final isAdbGranted =
         await PermissionService.isWriteSecureSettingsGranted();
-    final systemSettings = await homeRepository.getSystemSettings();
+    final settingsResult = await homeRepository.getSystemSettings();
+    final systemSettings =
+        settingsResult.data ?? SystemSettingsData.fallback;
+
     emit(
       state.copyWith(
         consoleState: state.consoleState.copyWith(
@@ -78,15 +97,27 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
     );
   }
 
+  static const String _blockedMsg =
+      'Direct setting write blocked by Android. Opened Developer Settings.';
+
   Future<void> toggleDevOptions({required bool value}) async {
     if (!state.consoleState.isAdbGrantMode) {
       await PermissionService.openDeveloperSettings();
+      emit(
+        state.copyWith(
+          errorMessage: 'Direct ADB mode required to toggle Developer Options.',
+        ),
+      );
       return;
     }
-    final success = await homeRepository.setDevOptions(enabled: value);
-    if (!success) {
-      // Direct setting write failed on OEM ROM — fallback to system intent
+    final result = await homeRepository.setDevOptions(enabled: value);
+    if (result.isFailure || result.data != true) {
       await PermissionService.openDeveloperSettings();
+      emit(
+        state.copyWith(
+          errorMessage: result.failure?.message ?? _blockedMsg,
+        ),
+      );
       return;
     }
     emit(
@@ -101,11 +132,21 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
   Future<void> toggleUsbDebugging({required bool value}) async {
     if (!state.consoleState.isAdbGrantMode) {
       await PermissionService.openDeveloperSettings();
+      emit(
+        state.copyWith(
+          errorMessage: 'Direct ADB mode required to toggle USB Debugging.',
+        ),
+      );
       return;
     }
-    final success = await homeRepository.setUsbDebugging(enabled: value);
-    if (!success) {
+    final result = await homeRepository.setUsbDebugging(enabled: value);
+    if (result.isFailure || result.data != true) {
       await PermissionService.openDeveloperSettings();
+      emit(
+        state.copyWith(
+          errorMessage: result.failure?.message ?? _blockedMsg,
+        ),
+      );
       return;
     }
     emit(
@@ -119,11 +160,22 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
   Future<void> toggleWirelessDebugging({required bool value}) async {
     if (!state.consoleState.isAdbGrantMode) {
       await PermissionService.openDeveloperSettings();
+      emit(
+        state.copyWith(
+          errorMessage:
+              'Direct ADB mode required to toggle Wireless Debugging.',
+        ),
+      );
       return;
     }
-    final success = await homeRepository.setWirelessDebugging(enabled: value);
-    if (!success) {
+    final result = await homeRepository.setWirelessDebugging(enabled: value);
+    if (result.isFailure || result.data != true) {
       await PermissionService.openDeveloperSettings();
+      emit(
+        state.copyWith(
+          errorMessage: result.failure?.message ?? _blockedMsg,
+        ),
+      );
       return;
     }
     emit(

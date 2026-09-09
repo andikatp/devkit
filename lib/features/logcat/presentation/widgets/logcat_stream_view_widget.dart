@@ -12,8 +12,12 @@ class LogcatStreamViewWidget extends StatefulWidget {
   State<LogcatStreamViewWidget> createState() => _LogcatStreamViewWidgetState();
 }
 
-class _LogcatStreamViewWidgetState extends State<LogcatStreamViewWidget> {
+class _LogcatStreamViewWidgetState extends State<LogcatStreamViewWidget>
+    with AutomaticKeepAliveClientMixin {
   late final ScrollController _scrollController;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -58,6 +62,7 @@ class _LogcatStreamViewWidgetState extends State<LogcatStreamViewWidget> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final filteredLogs = context.select<LogcatCubit, List<LogcatLogEntity>>(
       (c) => c.state.filteredLogs,
     );
@@ -86,7 +91,6 @@ class _LogcatStreamViewWidgetState extends State<LogcatStreamViewWidget> {
             )
           : ListView.builder(
               controller: _scrollController,
-              addAutomaticKeepAlives: false,
               itemCount: filteredLogs.length,
               itemBuilder: (context, index) {
                 final log = filteredLogs[index];

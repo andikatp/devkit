@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract final class AppColors {
-  /// Private constructor for static utility class.
-  // ignore: unnecessary_type_name_in_constructor
-  const AppColors._();
+  const new _();
 
   static const Color cyberBlack = Color(0xFF050A1A);
   static const Color cyberDark = Color(0xFF080F24);
@@ -23,9 +21,7 @@ abstract final class AppColors {
 }
 
 abstract final class AppTheme {
-  /// Private constructor for static utility class.
-  // ignore: unnecessary_type_name_in_constructor
-  const AppTheme._();
+  const new _();
 
   static ThemeData darkCyberTheme = ThemeData(
     brightness: Brightness.dark,

@@ -13,6 +13,7 @@ class DevKitDashboardView extends StatelessWidget {
 
   void _onStateListener(BuildContext context, DevKitDashboardState state) {
     if (state.successMessage != null) {
+      ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -29,6 +30,7 @@ class DevKitDashboardView extends StatelessWidget {
         ),
       );
     } else if (state.errorMessage != null) {
+      ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
