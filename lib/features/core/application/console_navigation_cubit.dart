@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ConsoleNavigationCubit extends Cubit<ConsoleNavigationState> {
   new({ConsoleNavigationState? initialState})
-      : super(initialState ?? const .new());
+    : super(initialState ?? const .new());
 
   void selectTab({required int index}) {
     emit(state.copyWith(currentNavIndex: index));

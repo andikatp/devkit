@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CommandCopyBox extends StatefulWidget {
-  const new({
-    required this.commandText,
-    super.key,
-  });
+  const new({required this.commandText, super.key});
 
   final String commandText;
 

@@ -29,9 +29,7 @@ class PermissionsBottomBar extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.cyanBright,
             foregroundColor: AppColors.cyberBlack,
-            shape: RoundedRectangleBorder(
-              borderRadius: .circular(10),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: .circular(10)),
             elevation: 0,
           ),
           child: Row(

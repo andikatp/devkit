@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:devkit/core/extensions/text_theme.dart';
 import 'package:devkit/core/services/device_info_service.dart';
+import 'package:devkit/core/services/review_service.dart';
 import 'package:devkit/core/theme/app_theme.dart';
 import 'package:devkit/core/utils/safe_call.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_cubit.dart';
@@ -69,57 +72,74 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                     ),
                   ],
                 ),
-                InkWell(
-                  onTap: () => _onOpenPermissions(context),
-                  borderRadius: .circular(6),
-                  child: Container(
-                    padding: const .symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: isAdbGranted
-                          ? AppColors.cyanBright.withValues(alpha: 0.15)
-                          : AppColors.cyberAmber.withValues(alpha: 0.15),
-                      borderRadius: .circular(4),
-                      border: Border.all(
-                        color: isAdbGranted
-                            ? AppColors.cyanBright.withValues(alpha: 0.8)
-                            : AppColors.cyberAmber.withValues(alpha: 0.8),
+                Row(
+                  spacing: 12,
+                  children: [
+                    InkWell(
+                      onTap: () => unawaited(ReviewService.openStoreListing()),
+                      borderRadius: .circular(8),
+                      child: const Padding(
+                        padding: .all(4),
+                        child: Icon(
+                          Icons.star_rounded,
+                          color: AppColors.cyberAmber,
+                          size: 24,
+                        ),
                       ),
-                      boxShadow: [
-                        BoxShadow(
+                    ),
+                    InkWell(
+                      onTap: () => _onOpenPermissions(context),
+                      borderRadius: .circular(6),
+                      child: Container(
+                        padding: const .symmetric(horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
                           color: isAdbGranted
-                              ? AppColors.cyanBright.withValues(alpha: 0.3)
-                              : AppColors.cyberAmber.withValues(alpha: 0.3),
-                          blurRadius: 8,
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisSize: .min,
-                      spacing: 4,
-                      children: [
-                        Text(
-                          isAdbGranted ? '⚡ ' : '⚠ ',
-                          style: context.bodySmall.copyWith(
+                              ? AppColors.cyanBright.withValues(alpha: 0.15)
+                              : AppColors.cyberAmber.withValues(alpha: 0.15),
+                          borderRadius: .circular(4),
+                          border: Border.all(
                             color: isAdbGranted
-                                ? AppColors.cyanBright
-                                : AppColors.cyberAmber,
-                            fontSize: 10,
+                                ? AppColors.cyanBright.withValues(alpha: 0.8)
+                                : AppColors.cyberAmber.withValues(alpha: 0.8),
                           ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: isAdbGranted
+                                  ? AppColors.cyanBright.withValues(alpha: 0.3)
+                                  : AppColors.cyberAmber.withValues(alpha: 0.3),
+                              blurRadius: 8,
+                            ),
+                          ],
                         ),
-                        Text(
-                          isAdbGranted ? 'ADB GRANTED' : 'SETUP REQUIRED',
-                          style: context.labelSmall.copyWith(
-                            color: isAdbGranted
-                                ? AppColors.cyanBright
-                                : AppColors.cyberAmber,
-                            fontSize: 10,
-                            fontWeight: .bold,
-                            letterSpacing: 0.5,
-                          ),
+                        child: Row(
+                          mainAxisSize: .min,
+                          spacing: 4,
+                          children: [
+                            Text(
+                              isAdbGranted ? '⚡ ' : '⚠ ',
+                              style: context.bodySmall.copyWith(
+                                color: isAdbGranted
+                                    ? AppColors.cyanBright
+                                    : AppColors.cyberAmber,
+                                fontSize: 10,
+                              ),
+                            ),
+                            Text(
+                              isAdbGranted ? 'ADB GRANTED' : 'SETUP REQUIRED',
+                              style: context.labelSmall.copyWith(
+                                color: isAdbGranted
+                                    ? AppColors.cyanBright
+                                    : AppColors.cyberAmber,
+                                fontSize: 10,
+                                fontWeight: .bold,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),

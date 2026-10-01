@@ -3,10 +3,7 @@ import 'package:devkit/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class ScalerOptionItem<T> {
-  const new({
-    required this.label,
-    required this.value,
-  });
+  const new({required this.label, required this.value});
 
   final String label;
   final T value;

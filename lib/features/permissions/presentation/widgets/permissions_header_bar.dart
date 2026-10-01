@@ -76,10 +76,7 @@ class PermissionsHeaderBar extends StatelessWidget {
                   color: AppColors.cyanBright,
                   borderRadius: .circular(2),
                   boxShadow: const [
-                    BoxShadow(
-                      color: AppColors.cyanBright,
-                      blurRadius: 6,
-                    ),
+                    BoxShadow(color: AppColors.cyanBright, blurRadius: 6),
                   ],
                 ),
               ),

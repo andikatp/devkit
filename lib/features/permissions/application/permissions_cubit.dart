@@ -69,21 +69,17 @@ class PermissionsCubit extends Cubit<PermissionsState> {
 
   void _startAutoPolling() {
     _pollingTimer?.cancel();
-    _pollingTimer = Timer.periodic(
-      const Duration(seconds: 2),
-      (_) async {
-        if (state.isDirectModeGranted) {
-          _stopAutoPolling();
-          return;
-        }
-        final isGranted =
-            await PermissionService.isWriteSecureSettingsGranted();
-        if (isGranted && !isClosed) {
-          _stopAutoPolling();
-          emit(state.copyWith(isDirectModeGranted: true));
-        }
-      },
-    );
+    _pollingTimer = Timer.periodic(const Duration(seconds: 2), (_) async {
+      if (state.isDirectModeGranted) {
+        _stopAutoPolling();
+        return;
+      }
+      final isGranted = await PermissionService.isWriteSecureSettingsGranted();
+      if (isGranted && !isClosed) {
+        _stopAutoPolling();
+        emit(state.copyWith(isDirectModeGranted: true));
+      }
+    });
   }
 
   void _stopAutoPolling() {

@@ -95,8 +95,8 @@ abstract final class PingService {
       if (match != null) {
         return double.tryParse(match.group(1) ?? '') ?? 0;
       }
-      final rttLineMatch =
-          RegExp(r'= ([\d.]+)/([\d.]+)/([\d.]+)').firstMatch(output);
+      final rttLineMatch = RegExp(r'= ([\d.]+)/([\d.]+)/([\d.]+)')
+          .firstMatch(output);
       if (rttLineMatch != null) {
         return double.tryParse(rttLineMatch.group(2) ?? '') ?? 0;
       }

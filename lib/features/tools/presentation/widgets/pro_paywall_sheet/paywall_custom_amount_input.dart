@@ -5,11 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PaywallCustomAmountInput extends StatelessWidget {
-  const new({
-    required this.controller,
-    required this.focusNode,
-    super.key,
-  });
+  const new({required this.controller, required this.focusNode, super.key});
 
   final TextEditingController controller;
   final FocusNode focusNode;

@@ -89,10 +89,10 @@ class AdbPermissionCard extends StatelessWidget {
           Text(
             isBlockedMode
                 ? 'Your device OS or Auto Blocker is restricting direct 1-tap '
-                    'setting writes even with ADB granted. Open Developer '
-                    'Settings to toggle manually:'
+                      'setting writes even with ADB granted. Open Developer '
+                      'Settings to toggle manually:'
                 : 'To enable 1-tap direct toggles without opening system '
-                    'settings, grant WRITE_SECURE_SETTINGS via ADB:',
+                      'settings, grant WRITE_SECURE_SETTINGS via ADB:',
             style: context.bodySmall.copyWith(
               color: AppColors.cyberMuted,
               fontSize: 11,
@@ -129,9 +129,7 @@ class AdbPermissionCard extends StatelessWidget {
                       foregroundColor: AppColors.cyberAmber,
                       side: const BorderSide(color: AppColors.cyberAmber),
                       padding: const .symmetric(vertical: 8),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: .circular(6),
-                      ),
+                      shape: RoundedRectangleBorder(borderRadius: .circular(6)),
                     ),
                     icon: const Icon(Icons.copy, size: 14),
                     label: Text(
@@ -151,9 +149,7 @@ class AdbPermissionCard extends StatelessWidget {
                     foregroundColor: AppColors.cyanBright,
                     side: const BorderSide(color: AppColors.cyanBright),
                     padding: const .symmetric(vertical: 8),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: .circular(6),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: .circular(6)),
                   ),
                   icon: const Icon(Icons.settings, size: 14),
                   label: Text(

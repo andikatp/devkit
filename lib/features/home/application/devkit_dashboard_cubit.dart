@@ -3,20 +3,73 @@ import 'dart:async';
 import 'package:devkit/core/services/device_info_service.dart';
 import 'package:devkit/core/services/permission_service.dart';
 import 'package:devkit/core/services/ping_service.dart';
+import 'package:devkit/core/services/review_service.dart';
 import 'package:devkit/core/services/system_settings_service.dart';
+import 'package:devkit/core/services/system_settings_stream_service.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_state.dart';
 import 'package:devkit/features/home/domain/repositories/home_repository.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
-  new({required this.homeRepository, DevKitDashboardState? initialState})
-    : super(initialState ?? const .new()) {
+class DevKitDashboardCubit extends Cubit<DevKitDashboardState>
+    with WidgetsBindingObserver {
+  new({
+    required this.homeRepository,
+    required this.settingsStreamService,
+    DevKitDashboardState? initialState,
+  }) : super(initialState ?? const DevKitDashboardState()) {
+    WidgetsBinding.instance.addObserver(this);
+    _settingsSubscription = settingsStreamService.dashboardSettingsStream
+        .listen(_onSettingsChanged);
     unawaited(_initDashboard());
   }
 
   final HomeRepository homeRepository;
+  final SystemSettingsStreamService settingsStreamService;
   Timer? _pingTimer;
-  Timer? _settingsTimer;
+  StreamSubscription<SystemSettingsData>? _settingsSubscription;
+
+  void _onSettingsChanged(SystemSettingsData settings) {
+    if (isClosed) return;
+    emit(
+      state.copyWith(
+        consoleState: state.consoleState.copyWith(
+          isDevOptionsOn: settings.isDevOptionsOn,
+          isUsbDebuggingOn: settings.isUsbDebuggingOn,
+          isWirelessDebuggingOn: settings.isWirelessDebuggingOn,
+          devicePort: settings.adbPort,
+          pairingPort: settings.pairingPort,
+        ),
+      ),
+    );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      unawaited(_refreshOnResume());
+    }
+  }
+
+  Future<void> _refreshOnResume() async {
+    if (isClosed) return;
+    final settingsResult = await homeRepository.getSystemSettings();
+    if (isClosed) return;
+    if (settingsResult.isSuccess && settingsResult.data != null) {
+      final systemSettings = settingsResult.data!;
+      emit(
+        state.copyWith(
+          consoleState: state.consoleState.copyWith(
+            isDevOptionsOn: systemSettings.isDevOptionsOn,
+            isUsbDebuggingOn: systemSettings.isUsbDebuggingOn,
+            isWirelessDebuggingOn: systemSettings.isWirelessDebuggingOn,
+            devicePort: systemSettings.adbPort,
+            pairingPort: systemSettings.pairingPort,
+          ),
+        ),
+      );
+    }
+  }
 
   Future<void> _initDashboard() async {
     final infoResult = await homeRepository.getDeviceInfo();
@@ -45,33 +98,10 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
           isUsbDebuggingOn: systemSettings.isUsbDebuggingOn,
           isWirelessDebuggingOn: systemSettings.isWirelessDebuggingOn,
           devicePort: systemSettings.adbPort,
+          pairingPort: systemSettings.pairingPort,
         ),
       ),
     );
-
-    _settingsTimer?.cancel();
-    _settingsTimer = Timer.periodic(
-      const Duration(seconds: 3),
-      (_) => unawaited(_refreshSystemSettings()),
-    );
-  }
-
-  Future<void> _refreshSystemSettings() async {
-    if (isClosed) return;
-    final settingsResult = await homeRepository.getSystemSettings();
-    if (settingsResult.isSuccess && settingsResult.data != null) {
-      final systemSettings = settingsResult.data!;
-      emit(
-        state.copyWith(
-          consoleState: state.consoleState.copyWith(
-            isDevOptionsOn: systemSettings.isDevOptionsOn,
-            isUsbDebuggingOn: systemSettings.isUsbDebuggingOn,
-            isWirelessDebuggingOn: systemSettings.isWirelessDebuggingOn,
-            devicePort: systemSettings.adbPort,
-          ),
-        ),
-      );
-    }
   }
 
   Future<void> checkPermissions() async {
@@ -87,6 +117,7 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
           isUsbDebuggingOn: systemSettings.isUsbDebuggingOn,
           isWirelessDebuggingOn: systemSettings.isWirelessDebuggingOn,
           devicePort: systemSettings.adbPort,
+          pairingPort: systemSettings.pairingPort,
         ),
       ),
     );
@@ -117,6 +148,7 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
         successMessage: 'Developer Options ${value ? 'ENABLED' : 'DISABLED'}',
       ),
     );
+    unawaited(ReviewService.recordSuccessfulAction());
   }
 
   Future<void> toggleUsbDebugging({required bool value}) async {
@@ -141,6 +173,7 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
         successMessage: 'USB Debugging ${value ? 'ENABLED' : 'DISABLED'}',
       ),
     );
+    unawaited(ReviewService.recordSuccessfulAction());
   }
 
   Future<void> toggleWirelessDebugging({required bool value}) async {
@@ -166,6 +199,7 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
         successMessage: 'Wireless Debugging ${value ? 'ENABLED' : 'DISABLED'}',
       ),
     );
+    unawaited(ReviewService.recordSuccessfulAction());
   }
 
   void toggleAdbGrantMode() {
@@ -239,8 +273,9 @@ class DevKitDashboardCubit extends Cubit<DevKitDashboardState> {
 
   @override
   Future<void> close() async {
+    WidgetsBinding.instance.removeObserver(this);
     _pingTimer?.cancel();
-    _settingsTimer?.cancel();
+    await _settingsSubscription?.cancel();
     await super.close();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:devkit/core/services/system_settings_stream_service.dart';
 import 'package:devkit/features/core/application/console_navigation_cubit.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_cubit.dart';
 import 'package:devkit/features/home/domain/repositories/home_repository.dart';
@@ -19,6 +20,11 @@ import 'package:get_it/get_it.dart';
 final GetIt sl = GetIt.instance;
 
 Future<void> initServiceLocator() async {
+  // Core Services
+  sl.registerLazySingleton<SystemSettingsStreamService>(
+    SystemSettingsStreamService.new,
+  );
+
   // Datasources
   sl
     ..registerLazySingleton<HomeLocalDataSource>(
@@ -27,9 +33,7 @@ Future<void> initServiceLocator() async {
     ..registerLazySingleton<LogcatLocalDataSource>(
       LogcatLocalDataSourceImpl.new,
     )
-    ..registerLazySingleton<ToolsLocalDataSource>(
-      ToolsLocalDataSourceImpl.new,
-    );
+    ..registerLazySingleton<ToolsLocalDataSource>(ToolsLocalDataSourceImpl.new);
 
   // Repositories
   sl
@@ -42,25 +46,20 @@ Future<void> initServiceLocator() async {
     ..registerLazySingleton<ToolsRepository>(
       () => ToolsRepositoryImpl(localDataSource: sl()),
     )
-    ..registerLazySingleton<IapRepository>(
-      IapRepositoryImpl.new,
-    );
+    ..registerLazySingleton<IapRepository>(IapRepositoryImpl.new);
 
   // Cubits / Application Layer
   sl
     ..registerFactory<DevKitDashboardCubit>(
-      () => DevKitDashboardCubit(homeRepository: sl()),
+      () => DevKitDashboardCubit(
+        homeRepository: sl(),
+        settingsStreamService: sl(),
+      ),
     )
-    ..registerFactory<LogcatCubit>(
-      () => LogcatCubit(logcatRepository: sl()),
-    )
+    ..registerFactory<LogcatCubit>(() => LogcatCubit(logcatRepository: sl()))
     ..registerFactory<ToolsCubit>(
-      () => ToolsCubit(toolsRepository: sl()),
+      () => ToolsCubit(toolsRepository: sl(), settingsStreamService: sl()),
     )
-    ..registerFactory<PaywallCubit>(
-      () => PaywallCubit(iapRepository: sl()),
-    )
-    ..registerFactory<ConsoleNavigationCubit>(
-      ConsoleNavigationCubit.new,
-    );
+    ..registerFactory<PaywallCubit>(() => PaywallCubit(iapRepository: sl()))
+    ..registerFactory<ConsoleNavigationCubit>(ConsoleNavigationCubit.new);
 }

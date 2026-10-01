@@ -1,4 +1,6 @@
 import 'package:devkit/core/errors/failure.dart';
+import 'package:devkit/core/services/system_settings_service.dart';
+import 'package:devkit/core/services/system_settings_stream_service.dart';
 import 'package:devkit/core/utils/safe_call.dart';
 import 'package:devkit/features/tools/application/tools_cubit.dart';
 import 'package:devkit/features/tools/application/tools_state.dart';
@@ -139,7 +141,18 @@ class MockToolsRepository implements ToolsRepository {
   }
 }
 
+class MockSettingsStreamService extends SystemSettingsStreamService {
+  @override
+  Stream<SystemSettingsData> get dashboardSettingsStream =>
+      const Stream.empty();
+
+  @override
+  Stream<ToolsSettingsData> get toolsSettingsStream => const Stream.empty();
+}
+
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   group('ToolsState', () {
     test('supports default values and copyWith', () {
       const state = ToolsState();
@@ -168,7 +181,10 @@ void main() {
 
     setUp(() {
       mockRepository = MockToolsRepository();
-      cubit = ToolsCubit(toolsRepository: mockRepository);
+      cubit = ToolsCubit(
+        toolsRepository: mockRepository,
+        settingsStreamService: MockSettingsStreamService(),
+      );
     });
 
     tearDown(() async {

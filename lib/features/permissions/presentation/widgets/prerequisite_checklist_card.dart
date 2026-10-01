@@ -61,9 +61,7 @@ class PrerequisiteChecklistCard extends StatelessWidget {
               ),
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: AppColors.cyberBorder),
-                shape: RoundedRectangleBorder(
-                  borderRadius: .circular(6),
-                ),
+                shape: RoundedRectangleBorder(borderRadius: .circular(6)),
                 padding: const .symmetric(horizontal: 10, vertical: 4),
               ),
             ),

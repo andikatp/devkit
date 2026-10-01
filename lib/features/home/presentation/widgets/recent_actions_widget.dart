@@ -57,10 +57,10 @@ class RecentActionsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final consoleState =
-        context.select<DevKitDashboardCubit, ConsoleStateEntity>(
-      (c) => c.state.consoleState,
-    );
+    final consoleState = context
+        .select<DevKitDashboardCubit, ConsoleStateEntity>(
+          (c) => c.state.consoleState,
+        );
 
     return Column(
       crossAxisAlignment: .start,
