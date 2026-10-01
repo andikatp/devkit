@@ -29,9 +29,7 @@ class SkipConfirmationDialog extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.cyberAmber.withValues(alpha: 0.15),
               borderRadius: .circular(8),
-              border: .all(
-                color: AppColors.cyberAmber.withValues(alpha: 0.6),
-              ),
+              border: .all(color: AppColors.cyberAmber.withValues(alpha: 0.6)),
             ),
             child: const Icon(
               Icons.warning_amber_rounded,
@@ -71,9 +69,7 @@ class SkipConfirmationDialog extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pop(false),
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: AppColors.cyberBorder),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: .circular(8),
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: .circular(8)),
                 ),
                 child: Text(
                   'Go Back',
@@ -90,9 +86,7 @@ class SkipConfirmationDialog extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.cyanBright,
                   foregroundColor: AppColors.cyberBlack,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: .circular(8),
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: .circular(8)),
                   elevation: 0,
                 ),
                 child: Text(

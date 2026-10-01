@@ -72,9 +72,7 @@ class GrantStatusCard extends StatelessWidget {
                     ? AppColors.cyberEmerald
                     : AppColors.cyberBorder,
               ),
-              shape: RoundedRectangleBorder(
-                borderRadius: .circular(6),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: .circular(6)),
               padding: const .symmetric(horizontal: 12, vertical: 6),
             ),
             child: isVerifying

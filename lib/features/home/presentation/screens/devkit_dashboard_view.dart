@@ -3,6 +3,7 @@ import 'package:devkit/features/core/presentation/widgets/header_widget.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_cubit.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_state.dart';
 import 'package:devkit/features/home/presentation/widgets/connect_command_card.dart';
+import 'package:devkit/features/home/presentation/widgets/pair_command_card.dart';
 import 'package:devkit/features/home/presentation/widgets/recent_actions_widget.dart';
 import 'package:devkit/features/home/presentation/widgets/state_toggles_card.dart';
 import 'package:flutter/material.dart';
@@ -51,17 +52,23 @@ class DevKitDashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<DevKitDashboardCubit>().state;
+    final isPairing = state.consoleState.pairingPort > 0;
+
     return BlocListener<DevKitDashboardCubit, DevKitDashboardState>(
       listener: _onStateListener,
-      child: const SingleChildScrollView(
-        padding: .all(16),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
         child: Column(
           spacing: 28,
           children: [
-            HeaderWidget(),
-            RecentActionsWidget(),
-            StateTogglesCard(),
-            ConnectCommandCard(),
+            const HeaderWidget(),
+            const RecentActionsWidget(),
+            const StateTogglesCard(),
+            if (isPairing)
+              const PairCommandCard()
+            else
+              const ConnectCommandCard(stepNumber: '03'),
           ],
         ),
       ),

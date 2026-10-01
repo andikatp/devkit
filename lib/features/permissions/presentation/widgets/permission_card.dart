@@ -46,11 +46,7 @@ class PermissionCard extends StatelessWidget {
                     color: AppColors.cyanBright.withValues(alpha: 0.3),
                   ),
                 ),
-                child: Icon(
-                  icon,
-                  color: AppColors.cyanBright,
-                  size: 22,
-                ),
+                child: Icon(icon, color: AppColors.cyanBright, size: 22),
               ),
               Expanded(
                 child: Column(
@@ -128,9 +124,7 @@ class PermissionCard extends StatelessWidget {
                     foregroundColor: AppColors.cyberBlack,
                     elevation: 0,
                     padding: const .symmetric(horizontal: 16, vertical: 6),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: .circular(6),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: .circular(6)),
                   ),
                   child: Text(
                     'Allow',

@@ -21,10 +21,7 @@ class ProSuiteBannerCard extends StatelessWidget {
       containerOptions: const ContainerOptions(
         backgroundColor: AppColors.cyberCard,
         borderRadius: 12,
-        borderSide: BorderSide(
-          color: AppColors.cyberAmber,
-          width: 1.5,
-        ),
+        borderSide: BorderSide(color: AppColors.cyberAmber, width: 1.5),
         padding: EdgeInsets.all(14),
       ),
       child: Column(
@@ -33,10 +30,7 @@ class ProSuiteBannerCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                '❤️ ',
-                style: context.bodyMedium.copyWith(fontSize: 16),
-              ),
+              Text('❤️ ', style: context.bodyMedium.copyWith(fontSize: 16)),
               Text(
                 'SUPPORT DEVKIT CREATOR',
                 style: context.titleSmall.copyWith(
@@ -65,17 +59,12 @@ class ProSuiteBannerCard extends StatelessWidget {
                 backgroundColor: AppColors.cyberAmber,
                 foregroundColor: Colors.black,
                 padding: const .symmetric(vertical: 10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: .circular(6),
-                ),
+                shape: RoundedRectangleBorder(borderRadius: .circular(6)),
               ),
               child: Row(
                 mainAxisAlignment: .center,
                 children: [
-                  Text(
-                    '☕ ',
-                    style: context.bodyMedium.copyWith(fontSize: 14),
-                  ),
+                  Text('☕ ', style: context.bodyMedium.copyWith(fontSize: 14)),
                   Text(
                     'DONATE TO CREATOR',
                     style: context.labelSmall.copyWith(

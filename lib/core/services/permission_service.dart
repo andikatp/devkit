@@ -5,14 +5,16 @@ import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 abstract final class PermissionService {
-  static const MethodChannel _channel =
-      MethodChannel('com.andikatp.devkit/permissions');
+  static const MethodChannel _channel = MethodChannel(
+    'com.andikatp.devkit/permissions',
+  );
 
   static Future<bool> isWriteSecureSettingsGranted() async {
     if (!Platform.isAndroid) return true;
     try {
-      final isGranted =
-          await _channel.invokeMethod<bool>('checkWriteSecureSettings');
+      final isGranted = await _channel.invokeMethod<bool>(
+        'checkWriteSecureSettings',
+      );
       return isGranted ?? false;
     } on Exception catch (_) {
       // Fallback: If channel not attached, return false
@@ -61,9 +63,7 @@ abstract final class PermissionService {
     try {
       await intent.launch();
     } on Exception catch (_) {
-      const fallbackIntent = AndroidIntent(
-        action: 'android.settings.SETTINGS',
-      );
+      const fallbackIntent = AndroidIntent(action: 'android.settings.SETTINGS');
       await fallbackIntent.launch();
     }
   }

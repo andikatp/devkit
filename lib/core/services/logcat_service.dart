@@ -9,26 +9,28 @@ abstract final class LogcatService {
     if (Platform.isAndroid) {
       final controller = StreamController<LogcatLogEntity>();
       unawaited(
-        Process.start('logcat', ['-v', 'threadtime']).then((process) {
-          process.stdout
-              .transform(utf8.decoder)
-              .transform(const LineSplitter())
-              .listen((line) {
-            if (line.trim().isNotEmpty) {
-              final parsed = parseLogLine(line);
-              if (!controller.isClosed) controller.add(parsed);
-            }
-          });
+        Process.start('logcat', ['-v', 'threadtime'])
+            .then((process) {
+              process.stdout
+                  .transform(utf8.decoder)
+                  .transform(const LineSplitter())
+                  .listen((line) {
+                    if (line.trim().isNotEmpty) {
+                      final parsed = parseLogLine(line);
+                      if (!controller.isClosed) controller.add(parsed);
+                    }
+                  });
 
-          process.stderr
-              .transform(utf8.decoder)
-              .transform(const LineSplitter())
-              .listen((_) {});
+              process.stderr
+                  .transform(utf8.decoder)
+                  .transform(const LineSplitter())
+                  .listen((_) {});
 
-          controller.onCancel = process.kill;
-        }).catchError((dynamic _) {
-          _streamFallbackLogs(controller);
-        }),
+              controller.onCancel = process.kill;
+            })
+            .catchError((dynamic _) {
+              _streamFallbackLogs(controller);
+            }),
       );
       return controller.stream;
     } else {
@@ -125,8 +127,8 @@ abstract final class LogcatService {
       final level = count % 5 == 0
           ? LogLevel.error
           : (count % 3 == 0
-              ? LogLevel.warn
-              : (count.isEven ? LogLevel.debug : LogLevel.info));
+                ? LogLevel.warn
+                : (count.isEven ? LogLevel.debug : LogLevel.info));
 
       final tag = count % 4 == 0
           ? 'NetworkService'

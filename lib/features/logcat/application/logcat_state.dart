@@ -11,8 +11,9 @@ class LogcatState {
     this.isAutoScrollEnabled = true,
     this.successMessage,
     this.errorMessage,
-  }) : filteredLogs = filteredLogs ??
-            _computeFilteredLogs(logs, selectedLevel, filterQuery);
+  }) : filteredLogs =
+           filteredLogs ??
+           _computeFilteredLogs(logs, selectedLevel, filterQuery);
 
   final List<LogcatLogEntity> logs;
   final List<LogcatLogEntity> filteredLogs;
@@ -47,9 +48,8 @@ class LogcatState {
     final nextLogs = logs ?? this.logs;
     final nextLevel = selectedLevel ?? this.selectedLevel;
     final nextQuery = filterQuery ?? this.filterQuery;
-    final isFilterChanged = logs != null ||
-        selectedLevel != null ||
-        filterQuery != null;
+    final isFilterChanged =
+        logs != null || selectedLevel != null || filterQuery != null;
 
     return LogcatState(
       logs: nextLogs,

@@ -66,8 +66,9 @@ class _LogcatStreamViewWidgetState extends State<LogcatStreamViewWidget>
     final filteredLogs = context.select<LogcatCubit, List<LogcatLogEntity>>(
       (c) => c.state.filteredLogs,
     );
-    final isAutoScrollEnabled =
-        context.select<LogcatCubit, bool>((c) => c.state.isAutoScrollEnabled);
+    final isAutoScrollEnabled = context.select<LogcatCubit, bool>(
+      (c) => c.state.isAutoScrollEnabled,
+    );
 
     _scrollToBottomIfNeeded(isAutoScrollEnabled);
 

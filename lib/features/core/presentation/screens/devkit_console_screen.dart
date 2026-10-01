@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:devkit/core/di/injection_container.dart';
+import 'package:devkit/core/services/secure_storage_service.dart';
 import 'package:devkit/core/theme/app_theme.dart';
 import 'package:devkit/features/core/application/console_navigation_cubit.dart';
 import 'package:devkit/features/core/presentation/widgets/cyber_grid_background.dart';
 import 'package:devkit/features/core/presentation/widgets/navbar/bottom_navigation.dart';
+import 'package:devkit/features/core/presentation/widgets/walkthrough_sheet.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_cubit.dart';
 import 'package:devkit/features/home/presentation/screens/devkit_dashboard_view.dart';
 import 'package:devkit/features/logcat/application/logcat_cubit.dart';
@@ -29,6 +31,17 @@ class _DevKitConsoleScreenState extends State<DevKitConsoleScreen> {
   void initState() {
     super.initState();
     _pageController = PageController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unawaited(_checkWalkthrough());
+    });
+  }
+
+  Future<void> _checkWalkthrough() async {
+    final hasSeen = await SecureStorageService.hasSeenWalkthrough();
+    if (!hasSeen && mounted) {
+      await WalkthroughSheet.show(context);
+      await SecureStorageService.markWalkthroughSeen();
+    }
   }
 
   @override

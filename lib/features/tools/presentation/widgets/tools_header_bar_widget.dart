@@ -34,9 +34,7 @@ class ToolsHeaderBarWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.cyberAmber.withValues(alpha: 0.2),
             borderRadius: .circular(4),
-            border: .all(
-              color: AppColors.cyberAmber.withValues(alpha: 0.5),
-            ),
+            border: .all(color: AppColors.cyberAmber.withValues(alpha: 0.5)),
           ),
           child: Text(
             'PRO SUITE',

@@ -1,5 +1,6 @@
 import 'package:devkit/core/services/device_info_service.dart';
 import 'package:devkit/core/services/system_settings_service.dart';
+import 'package:devkit/core/services/system_settings_stream_service.dart';
 import 'package:devkit/core/utils/safe_call.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_cubit.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_state.dart';
@@ -48,6 +49,15 @@ class MockHomeRepository implements HomeRepository {
     wirelessDebuggingSet = enabled;
     return const Result<bool>.success(true);
   }
+}
+
+class MockSettingsStreamService extends SystemSettingsStreamService {
+  @override
+  Stream<SystemSettingsData> get dashboardSettingsStream =>
+      const Stream.empty();
+
+  @override
+  Stream<ToolsSettingsData> get toolsSettingsStream => const Stream.empty();
 }
 
 void main() {
@@ -100,7 +110,10 @@ void main() {
 
     setUp(() {
       mockRepository = MockHomeRepository();
-      cubit = DevKitDashboardCubit(homeRepository: mockRepository);
+      cubit = DevKitDashboardCubit(
+        homeRepository: mockRepository,
+        settingsStreamService: MockSettingsStreamService(),
+      );
     });
 
     tearDown(() async {

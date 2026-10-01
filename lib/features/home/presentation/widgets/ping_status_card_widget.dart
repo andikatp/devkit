@@ -10,10 +10,10 @@ class PingStatusCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final consoleState =
-        context.select<DevKitDashboardCubit, ConsoleStateEntity>(
-      (c) => c.state.consoleState,
-    );
+    final consoleState = context
+        .select<DevKitDashboardCubit, ConsoleStateEntity>(
+          (c) => c.state.consoleState,
+        );
     const host = 'google.com (8.8.8.8)';
 
     return Container(

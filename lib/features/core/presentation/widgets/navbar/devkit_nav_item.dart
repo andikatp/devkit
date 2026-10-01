@@ -45,18 +45,12 @@ class DevKitNavItem extends StatelessWidget {
                     top: -4,
                     right: -12,
                     child: Container(
-                      padding: const .symmetric(
-                        horizontal: 3,
-                        vertical: 1,
-                      ),
+                      padding: const .symmetric(horizontal: 3, vertical: 1),
                       decoration: BoxDecoration(
                         color: AppColors.cyberAmber,
                         borderRadius: .circular(3),
                         boxShadow: const [
-                          BoxShadow(
-                            color: AppColors.cyberAmber,
-                            blurRadius: 4,
-                          ),
+                          BoxShadow(color: AppColors.cyberAmber, blurRadius: 4),
                         ],
                       ),
                       child: Text(

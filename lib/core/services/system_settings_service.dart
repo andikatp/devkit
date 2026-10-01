@@ -9,12 +9,14 @@ class SystemSettingsData {
     required this.isUsbDebuggingOn,
     required this.isWirelessDebuggingOn,
     required this.adbPort,
+    this.pairingPort = 0,
   });
 
   final bool isDevOptionsOn;
   final bool isUsbDebuggingOn;
   final bool isWirelessDebuggingOn;
   final int adbPort;
+  final int pairingPort;
 
   static const SystemSettingsData fallback = SystemSettingsData(
     isDevOptionsOn: true,
@@ -25,16 +27,18 @@ class SystemSettingsData {
 }
 
 abstract final class SystemSettingsService {
-  static const MethodChannel _channel =
-      MethodChannel('com.andikatp.devkit/settings');
+  static const MethodChannel _channel = MethodChannel(
+    'com.andikatp.devkit/settings',
+  );
 
   static Future<Result<SystemSettingsData>> getSystemSettings() {
     if (!Platform.isAndroid) {
       return Future.value(const Result.success(SystemSettingsData.fallback));
     }
     return safeCall(() async {
-      final res =
-          await _channel.invokeMapMethod<String, dynamic>('getSystemSettings');
+      final res = await _channel.invokeMapMethod<String, dynamic>(
+        'getSystemSettings',
+      );
       if (res == null) return SystemSettingsData.fallback;
 
       return SystemSettingsData(
@@ -42,6 +46,7 @@ abstract final class SystemSettingsService {
         isUsbDebuggingOn: (res['isUsbDebuggingOn'] as bool?) ?? false,
         isWirelessDebuggingOn: (res['isWirelessDebuggingOn'] as bool?) ?? false,
         adbPort: (res['adbPort'] as int?) ?? 5555,
+        pairingPort: (res['pairingPort'] as int?) ?? 0,
       );
     });
   }
@@ -64,8 +69,9 @@ abstract final class SystemSettingsService {
       return Future.value(const Result.success(<String, dynamic>{}));
     }
     return safeCall(() async {
-      final res =
-          await _channel.invokeMapMethod<String, dynamic>('getToolsState');
+      final res = await _channel.invokeMapMethod<String, dynamic>(
+        'getToolsState',
+      );
       return res ?? <String, dynamic>{};
     });
   }

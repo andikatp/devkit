@@ -46,9 +46,7 @@ class LogcatScreen extends StatelessWidget {
             LogcatHeaderBarWidget(),
             LogcatSearchFilterWidget(),
             LogcatLevelFilterWidget(),
-            Expanded(
-              child: LogcatStreamViewWidget(),
-            ),
+            Expanded(child: LogcatStreamViewWidget()),
           ],
         ),
       ),

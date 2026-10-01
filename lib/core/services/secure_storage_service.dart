@@ -15,10 +15,22 @@ abstract final class SecureStorageService {
 
   static Future<void> markPermissionsSetupSeen() async {
     try {
-      await _storage.write(
-        key: AppKeys.hasSeenPermissionsSetup,
-        value: 'true',
-      );
+      await _storage.write(key: AppKeys.hasSeenPermissionsSetup, value: 'true');
+    } on Exception catch (_) {}
+  }
+
+  static Future<bool> hasSeenWalkthrough() async {
+    try {
+      final val = await _storage.read(key: AppKeys.hasSeenWalkthrough);
+      return val == 'true';
+    } on Exception catch (_) {
+      return false;
+    }
+  }
+
+  static Future<void> markWalkthroughSeen() async {
+    try {
+      await _storage.write(key: AppKeys.hasSeenWalkthrough, value: 'true');
     } on Exception catch (_) {}
   }
 }

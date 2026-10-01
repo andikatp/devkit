@@ -5,69 +5,24 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "free_debug",
+      "name": "Flutter Debug",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main_free.dart",
-      "args": [
-        "--flavor",
-        "free"
-      ]
+      "program": "lib/main.dart"
     },
     {
-      "name": "free_profile",
+      "name": "Flutter Profile",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main_free.dart",
-      "flutterMode": "profile",
-      "args": [
-        "--flavor",
-        "free"
-      ]
+      "program": "lib/main.dart",
+      "flutterMode": "profile"
     },
     {
-      "name": "free_release",
+      "name": "Flutter Release",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main_free.dart",
-      "flutterMode": "release",
-      "args": [
-        "--flavor",
-        "free"
-      ]
-    },
-    {
-      "name": "pro_debug",
-      "type": "dart",
-      "request": "launch",
-      "program": "lib/main_pro.dart",
-      "flutterMode": "debug",
-      "args": [
-        "--flavor",
-        "pro"
-      ]
-    },
-    {
-      "name": "pro_profile",
-      "type": "dart",
-      "request": "launch",
-      "program": "lib/main_pro.dart",
-      "flutterMode": "profile",
-      "args": [
-        "--flavor",
-        "pro"
-      ]
-    },
-    {
-      "name": "pro_release",
-      "type": "dart",
-      "request": "launch",
-      "program": "lib/main_pro.dart",
-      "flutterMode": "release",
-      "args": [
-        "--flavor",
-        "pro"
-      ]
+      "program": "lib/main.dart",
+      "flutterMode": "release"
     },
     {
       "name": "Run All Tests",

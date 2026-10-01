@@ -8,6 +8,7 @@ class ConsoleStateEntity {
     required this.devicePort,
     required this.deviceModel,
     required this.sdkVersion,
+    this.pairingPort = 0,
     this.isPingActive = false,
     this.rttMs = 0.0,
     this.packetsSent = 0,
@@ -23,6 +24,7 @@ class ConsoleStateEntity {
   final int devicePort;
   final String deviceModel;
   final int sdkVersion;
+  final int pairingPort;
   final bool isPingActive;
   final double rttMs;
   final int packetsSent;
@@ -38,6 +40,7 @@ class ConsoleStateEntity {
     int? devicePort,
     String? deviceModel,
     int? sdkVersion,
+    int? pairingPort,
     bool? isPingActive,
     double? rttMs,
     int? packetsSent,
@@ -54,6 +57,7 @@ class ConsoleStateEntity {
       devicePort: devicePort ?? this.devicePort,
       deviceModel: deviceModel ?? this.deviceModel,
       sdkVersion: sdkVersion ?? this.sdkVersion,
+      pairingPort: pairingPort ?? this.pairingPort,
       isPingActive: isPingActive ?? this.isPingActive,
       rttMs: rttMs ?? this.rttMs,
       packetsSent: packetsSent ?? this.packetsSent,

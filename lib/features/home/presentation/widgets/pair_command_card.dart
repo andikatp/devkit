@@ -3,22 +3,19 @@ import 'dart:async';
 import 'package:devkit/core/extensions/text_theme.dart';
 import 'package:devkit/core/theme/app_theme.dart';
 import 'package:devkit/features/home/application/devkit_dashboard_cubit.dart';
-import 'package:devkit/features/home/domain/entities/console_state_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glow_container/glow_container.dart';
 
-class ConnectCommandCard extends StatefulWidget {
-  const new({this.stepNumber = '04', super.key});
-  
-  final String stepNumber;
+class PairCommandCard extends StatefulWidget {
+  const new({super.key});
 
   @override
-  State<ConnectCommandCard> createState() => _ConnectCommandCardState();
+  State<PairCommandCard> createState() => _PairCommandCardState();
 }
 
-class _ConnectCommandCardState extends State<ConnectCommandCard> {
+class _PairCommandCardState extends State<PairCommandCard> {
   bool _copied = false;
 
   void _onCopyCommand(String commandText) {
@@ -34,7 +31,22 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<DevKitDashboardCubit>().state.consoleState;
-    final commandText = state.adbConnectCommand;
+    final commandText = state.pairingPort > 0
+        ? 'adb pair ${state.deviceIp}:${state.pairingPort} [PAIR_CODE]'
+        : 'adb pair ${state.deviceIp}:PORT [PAIR_CODE]';
+
+    final infoText = state.pairingPort > 0
+        ? 'Pairing port discovered! Replace [PAIR_CODE] with the 6-digit code '
+              'shown on your device.'
+        : "Tap 'Pair device with pairing code' on your device. Replace PORT "
+              'and [PAIR_CODE] manually.';
+
+    final infoIcon = state.pairingPort > 0
+        ? Icons.check_circle_outline
+        : Icons.info_outline;
+    final infoColor = state.pairingPort > 0
+        ? AppColors.cyberEmerald
+        : AppColors.cyberAmber;
 
     return Column(
       crossAxisAlignment: .start,
@@ -46,15 +58,15 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
             Row(
               children: [
                 Text(
-                  '${widget.stepNumber} ',
+                  '03 ',
                   style: context.labelSmall.copyWith(
-                    color: AppColors.primaryBlue,
+                    color: AppColors.cyberAmber,
                     fontWeight: .bold,
                     fontSize: 12,
                   ),
                 ),
                 Text(
-                  'CONNECT',
+                  'PAIR',
                   style: context.labelSmall.copyWith(
                     color: AppColors.cyberMuted,
                     fontWeight: .bold,
@@ -72,9 +84,9 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
                 border: .all(color: AppColors.cyberBorder),
               ),
               child: Text(
-                'MDNS',
+                'WIRELESS',
                 style: context.labelSmall.copyWith(
-                  color: AppColors.primaryBlue,
+                  color: AppColors.cyberAmber,
                   fontSize: 10,
                   fontWeight: .bold,
                   letterSpacing: 0.5,
@@ -85,7 +97,7 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
         ),
         GlowContainer(
           gradientColors: const [
-            AppColors.cyanBright,
+            AppColors.cyberAmber,
             AppColors.deepBlue,
             AppColors.primaryBlue,
           ],
@@ -102,7 +114,7 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
             spacing: 8,
             children: [
               Text(
-                'RUN THIS ON YOUR COMPUTER',
+                'PAIR YOUR DEVICE (REQUIRED FOR ANDROID 11+)',
                 style: context.labelSmall.copyWith(
                   color: AppColors.cyberMuted,
                   fontSize: 10,
@@ -128,7 +140,7 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
                         child: Text(
                           commandText,
                           style: context.bodySmall.copyWith(
-                            color: AppColors.cyanBright,
+                            color: AppColors.cyberAmber,
                             fontSize: 11,
                             fontWeight: .bold,
                             fontFamily: 'monospace',
@@ -155,7 +167,7 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
                             Icon(
                               _copied ? Icons.check : Icons.copy,
                               color: _copied
-                                  ? AppColors.cyanBright
+                                  ? AppColors.cyberAmber
                                   : AppColors.primaryBlue,
                               size: 12,
                             ),
@@ -163,7 +175,7 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
                               _copied ? 'COPIED!' : 'COPY',
                               style: context.labelSmall.copyWith(
                                 color: _copied
-                                    ? AppColors.cyanBright
+                                    ? AppColors.cyberAmber
                                     : Colors.white,
                                 fontSize: 10,
                                 fontWeight: .bold,
@@ -179,14 +191,10 @@ class _ConnectCommandCardState extends State<ConnectCommandCard> {
               Row(
                 spacing: 4,
                 children: [
-                  const Icon(
-                    Icons.check_circle_outline,
-                    color: AppColors.primaryBlue,
-                    size: 12,
-                  ),
+                  Icon(infoIcon, color: infoColor, size: 12),
                   Expanded(
                     child: Text(
-                      "Port discovered from this device's mDNS advertisement.",
+                      infoText,
                       style: context.bodySmall.copyWith(
                         color: AppColors.cyberMuted,
                         fontSize: 11,

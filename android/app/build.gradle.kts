@@ -1,6 +1,16 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("dev.flutter.flutter-gradle-plugin")
+}
+
+// 1. Read key.properties at the start
+val keystorePropertiesFile = rootProject.file("key.properties")
+val keystoreProperties = Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
 android {
@@ -13,8 +23,17 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    defaultConfig {
+    // 2. Define the release signing config using the properties
+    signingConfigs {
+        create("release") {
+            keyAlias = keystoreProperties["keyAlias"] as String?
+            keyPassword = keystoreProperties["keyPassword"] as String?
+            storeFile = keystoreProperties["storeFile"]?.let { rootProject.file("app/$it") }
+            storePassword = keystoreProperties["storePassword"] as String?
+        }
+    }
 
+    defaultConfig {
         applicationId = "com.andikatp.devkit"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
@@ -24,17 +43,9 @@ android {
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("debug")
-        }
-    }
-
-    flavorDimensions += "flavors"
-    productFlavors {
-        create("free") {
-            dimension = "flavors"
-        }
-        create("pro") {
-            dimension = "flavors"
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true
+            isShrinkResources = true
         }
     }
 }

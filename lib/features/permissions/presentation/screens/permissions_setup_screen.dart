@@ -27,8 +27,7 @@ class PermissionsSetupScreen extends StatefulWidget {
   }
 
   @override
-  State<PermissionsSetupScreen> createState() =>
-      _PermissionsSetupScreenState();
+  State<PermissionsSetupScreen> createState() => _PermissionsSetupScreenState();
 }
 
 class _PermissionsSetupScreenState extends State<PermissionsSetupScreen> {
@@ -113,10 +112,7 @@ class _PermissionsSetupScreenState extends State<PermissionsSetupScreen> {
                 onPageChanged: (index) {
                   cubit.setStep(index + 1);
                 },
-                children: const [
-                  BasicPermissionsStep(),
-                  DirectModeStep(),
-                ],
+                children: const [BasicPermissionsStep(), DirectModeStep()],
               ),
             ),
             PermissionsBottomBar(
